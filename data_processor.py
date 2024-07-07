@@ -1,5 +1,5 @@
 # data_processor.py
-from utils import validate_email
+from .utils import validate_email
 
 """
 Contains the DataProcessor class which has methods for processing data and checking the validity of email addresses using the function from utils.py.
