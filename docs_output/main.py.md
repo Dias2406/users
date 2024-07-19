@@ -1,7 +1,3 @@
-The documentation has been reviewed and improved for clarity and completeness without altering the structure as requested. 
-
----
-
 # main.py
 
 ## Source Code
@@ -20,6 +16,10 @@ def main():
     processor = DataProcessor()
     data = ["apple", "banana", "cherry"]
     processed_data = processor.process_data(data)
+    checked_emails = processor.check_emails(user.email)
+    print(f"Checked Emails: {checked_emails}")
+    user.update_email("invalid_email")
+    print(user)
     print(f"Processed Data: {processed_data}")
 
 if __name__ == "__main__":
@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
 ## FunctionDef main
 
-The primary purpose of this function is to showcase the instantiation of a `User` object and the utilization of the `DataProcessor` class for data manipulation.
+This function has been updated to demonstrate additional functionalities involving email validation and user email updating processes, alongside its original purpose of showcasing the instantiation of a `User` object and data manipulation using the `DataProcessor` class.
 
 **Parameters**:
 
@@ -40,24 +40,34 @@ The primary purpose of this function is to showcase the instantiation of a `User
 
 **Called_functions**:
 
-- `User.__init__(name: str, email: str)`: This method initializes a new `User` instance with a specified name and email address, assigning a unique ID to the user.
-- `DataProcessor.process_data(data: list) -> list`: This method takes a list of data items as input and returns a new list with each item converted to uppercase, demonstrating basic data processing.
+- `User.__init__(name: str, email: str)`: Initialises a new `User` instance with the specified name and email address, assigning a unique ID to the user.
+- `DataProcessor.process_data(data: list) -> list`: Processes a list of data items, returning a new list with each item converted to uppercase, showcasing basic data processing.
+- `DataProcessor.check_emails(email: str) -> bool`: This new method checks the validity of the specified email address and returns a boolean indicating the result.
+- `User.update_email(new_email: str)`: Updates the email address of the `User` instance with a new email provided as a parameter.
 
-**Code Description**: At the script's entry point, the `main` function is responsible for demonstrating the creation and utilization of class instances in Python. Initially, it creates a `User` instance with a given name and email. The user's information is then printed to the console. Subsequently, a `DataProcessor` instance is created, and a predefined list of fruit names is processed. The transformation involves converting each fruit name to uppercase, and the processed list is printed to showcase the outcome.
+**Code Description**: Initially, the function demonstrates the creation of a `User` instance and the utilization of a `DataProcessor` instance for basic data processing, as in the original script. The main updates to the function include the use of `DataProcessor`'s `check_emails` method to validate the user's email and the demonstration of the `User` class's `update_email` method to change the user's email. The results of the email check are printed, followed by an update to the user's email, which is demonstrated through an additional print statement showing the user's updated information. Lastly, the processed data list is printed, as before.
 
-**Note**: For this script to function correctly, it is essential that the `user` and `data_processor` modules are located within the same directory as this script or are accessible in the Python path. This ensures that the necessary classes can be imported without issues.
+**Note**: For the script to function correctly, it is crucial that the `user` and `data_processor` modules are located within the same directory as this script or are accessible in the Python path. This ensures the required classes are importable without issues.
 
 **Input Example**: 
 
-```
-As the main entry point, this function does not directly receive input from an external source. It internally utilizes a predefined list of strings ["apple", "banana", "cherry"] as input for the DataProcessor.process_data method.
-```
+As the main entry point, this function does not directly receive input from an external source. It utilizes:
+- A predefined list of strings ["apple", "banana", "cherry"] as input for the `DataProcessor.process_data` method.
+- The user's email from the created `User` instance for the `DataProcessor.check_emails` method.
 
 **Output Example**: 
 
 ```
-<User object at 0x7fcd3b2c1d30>
+<User object at [memory_address]>
+Checked Emails: [True/False]
+<User object with updated email at [memory_address]>
 Processed Data: ['APPLE', 'BANANA', 'CHERRY']
 ```
 
-The output showcases two key operations: the display of the `User` object (note: the actual memory address will vary) and the presentation of the processed data list, where each fruit name has been converted to uppercase, illustrating the data processing capability of the `DataProcessor` class.
+The output illustrates several operations: 
+- The display of the `User` object (note: the actual memory address will vary).
+- The result of the email validity check as `True` or `False` indicating whether the email passed validation.
+- The display of the `User` object after updating the email, showcasing the modification.
+- The presentation of the processed data list, demonstrating the data processing capability of the `DataProcessor` class with each fruit name converted to uppercase.
+
+These updates show the enhanced functionality of dealing with user emails and data processing.
