@@ -1,6 +1,4 @@
-The documentation provided for the `User` class in `user.py` is comprehensive and well-structured, offering clear insights into the class's purpose, attributes, and methods. However, there are a few areas where the documentation can be enhanced to improve clarity and completeness. Below are the suggested improvements, implemented within the constraints of not altering the structure or the example values:
-
-## Improved Documentation
+## Updated Documentation
 
 ### ClassDef User
 
@@ -28,15 +26,15 @@ The `User` class is designed to model a user within a system, uniquely identifie
         - `str`: A formatted string that includes the user's ID, name, and email address, making it easy to print and identify the user object.
 
 - `update_email(self, new_email: str) -> None`
-    - Updates the email address of the user.
+    - Updates the email address of the user if the new email is valid.
     - **Parameters**:
-        - `new_email` (`str`): The new email address to be set for the user. It should be a valid string representing the user's new email address.
+        - `new_email` (`str`): The new email address to be set for the user. Before updating, it validates the new email address to ensure it's in a proper format.
     - **Returns**:
-        - `None`: This method does not return any value. It updates the `email` attribute of the `User` instance.
+        - `None`: This method does not return any value. If the new email address is valid, it updates the `email` attribute of the `User` instance, else it remains unchanged.
 
-**Code Description**: The `User` class encapsulates user-related data within a system, providing a structured way to manage user information. It leverages the `uuid` library to assign a unique identifier to each user, ensuring data integrity and uniqueness. The class also demonstrates basic object-oriented principles such as encapsulation and abstraction by managing user data and providing a method to update a user's email address.
+**Code Description**: The updated `User` class continues to encapsulate user-related data within a system, providing a structured way to manage user information. It leverages the `uuid` library for unique identifier assignment and introduces email validation before updating a user's email, enhancing data integrity and ensuring the email format validity. The validation is performed using the `validate_email` function imported from the `utils` module, which represents a significant enhancement to ensure the correctness of the user's data.
 
-**Note**: It is important to ensure that the `name` and `email` parameters provided during the instantiation of a `User` object are strings. The ID is generated internally and is not intended to be modified directly.
+**Note**: The addition of email validation emphasizes the importance of ensuring that the `email` parameter provided during the instantiation of a `User` object, as well as when updating the email, are strings in a valid email format. The ID is generated internally and is not intended to be modified directly.
 
 **Input Example**: 
 
@@ -52,4 +50,4 @@ print(user1)
 ```
 Executing the print function on a `User` instance will produce an output similar to: `User [ID: <unique_id>, Name: John Doe, Email: john.doe@example.com]`. Here, `<unique_id>` represents the automatically generated unique identifier for the user.
 
-These enhancements aim to provide clearer explanations and ensure that the documentation is both informative and accessible to users of varying levels of technical expertise.
+This updated documentation ensures clarity and completeness, reflecting the current functionalities of the `User` class, including the newly added email validation feature for the update_email method.
