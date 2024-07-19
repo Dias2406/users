@@ -1,0 +1,100 @@
+
+This is the generated documentation for the source code. Please review it and improve the documentation quality.
+Note: Do not change the structure of the documentation. Do not change values in the input/output examples.
+After you are done with all checks of quality and accuracy, please remove the source code block.
+
+Context: 
+# data_processor.py
+
+## Source Code
+```python
+# data_processor.py
+from .utils import validate_email
+
+"""
+Contains the DataProcessor class which has methods for processing data and checking the validity of email addresses using the function from utils.py.
+"""
+class DataProcessor:
+    def process_data(self, data):
+        return [item.upper() for item in data]
+    
+    def check_emails(self, emails):
+        return [validate_email(email) for email in emails]
+```
+
+## ClassDef DataProcessor
+
+The function of the class is to provide methods for processing data and validating email addresses.
+
+**Attributes**:
+
+This class does not explicitly define any attributes.
+
+**Functions**:
+
+- `process_data(self, data)` -> `List[str]`
+    - Parameters:
+        - `data` (`List[str]`): A list of data items.
+    - Returns:
+        - `List[str]`: A new list with each item from the input list converted to uppercase.
+
+- `check_emails(self, emails)` -> `List[bool]`
+    - Parameters:
+        - `emails` (`List[str]`): A list of email addresses.
+    - Returns:
+        - `List[bool]`: A list of boolean values indicating the validity of each email address.
+
+**Called_functions**:
+
+- `validate_email(email: str) -> bool`: Checks if the given email address matches a specific pattern indicating a valid email format. Returns `True` if the email address is valid, otherwise `False`.
+
+**Code Description**: The `DataProcessor` class contains two methods for manipulating data. The `process_data` method transforms each item in a given list to uppercase, while the `check_emails` method validates each email in a given list using the `validate_email` function from the `utils` module.
+
+**Note**: The `check_emails` method relies on the `validate_email` function to determine the validity of email addresses. Ensure that the `utils` module is correctly imported and available.
+
+**Input Example**: 
+
+```
+data = ["apple", "banana", "cherry"]
+emails = ["test@example.com", "invalid-email", "another@example.com"]
+```
+
+**Output Example**:
+
+For `process_data` method:
+```
+["APPLE", "BANANA", "CHERRY"]
+```
+
+For `check_emails` method:
+```
+[True, False, True]
+```
+
+## FunctionDef validate_email (functions that do not belong to a class but are still present in the file)
+
+The function of the function is to check if the given email address matches a specific pattern indicating a valid email format.
+
+**Parameters**:
+
+- `email` (`str`): The email address to validate.
+
+**Returns**:
+
+- `bool`: `True` if the email address is valid, otherwise `False`.
+
+**Code Description**: This function uses a regular expression to match the given email address against a pattern that represents a valid email format. It is a utility function used by the `DataProcessor` class to validate email addresses.
+
+**Note**: This function is critical for the email validation process in the `DataProcessor` class. Ensure the regular expression covers all valid email formats you intend to support.
+
+**Input Example**: 
+
+```
+email = "test@example.com"
+```
+
+**Output Example**: 
+
+```
+True
+```
