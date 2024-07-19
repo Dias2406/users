@@ -1,4 +1,3 @@
-
 name: Update Documentation on Pull Request Comment
 
 on: 
@@ -20,14 +19,11 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Get PR branch
-        uses: xt0rted/pull-request-comment-branch@v1
-        id: comment-branch
-
       - name: Checkout PR branch
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ steps.comment-branch.outputs.head_ref }}
+        run: |
+          PR_BRANCH=$(echo ${{ github.event.issue.pull_request.head.ref }})
+          git fetch origin $PR_BRANCH
+          git checkout $PR_BRANCH
 
       - name: Get file path name and comment
         id: extract
