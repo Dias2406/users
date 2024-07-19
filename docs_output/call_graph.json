@@ -1,0 +1,101 @@
+{
+    "EXTERNAL::print": {
+        "uid": "external_print",
+        "name": "EXTERNAL::print",
+        "content": "",
+        "callers": [
+            "main::main"
+        ],
+        "callees": [],
+        "file_name": "EXTERNAL"
+    },
+    "EXTERNAL::re.match": {
+        "uid": "external_re_match",
+        "name": "EXTERNAL::re.match",
+        "content": "",
+        "callers": [
+            "utils::validate_email"
+        ],
+        "callees": [],
+        "file_name": "EXTERNAL"
+    },
+    "EXTERNAL::uuid.uuid4": {
+        "uid": "external_uuid_uuid4",
+        "name": "EXTERNAL::uuid.uuid4",
+        "content": "",
+        "callers": [
+            "user::User.__init__"
+        ],
+        "callees": [],
+        "file_name": "EXTERNAL"
+    },
+    "data_processor::DataProcessor.check_emails": {
+        "uid": "node_5173b03e",
+        "name": "data_processor::DataProcessor.check_emails",
+        "content": "\n\ndef check_emails(self, emails):\n    return [validate_email(email) for email in emails]\n",
+        "callers": [],
+        "callees": [
+            "utils::validate_email"
+        ],
+        "file_name": "/workspace/data_processor.py"
+    },
+    "data_processor::DataProcessor.process_data": {
+        "uid": "node_541aec26",
+        "name": "data_processor::DataProcessor.process_data",
+        "content": "\n\ndef process_data(self, data):\n    return [item.upper() for item in data]\n",
+        "callers": [
+            "main::main"
+        ],
+        "callees": [],
+        "file_name": "/workspace/data_processor.py"
+    },
+    "main::(global)": {
+        "uid": "node_7ee994d4",
+        "name": "main::(global)",
+        "content": "",
+        "callers": [],
+        "callees": [
+            "main::main"
+        ],
+        "file_name": "/workspace/main.py"
+    },
+    "main::main": {
+        "uid": "node_f249f311",
+        "name": "main::main",
+        "content": "\n\ndef main():\n    user = User('John Doe', 'john.doe@example.com')\n    print(user)\n    processor = DataProcessor()\n    data = ['apple', 'banana', 'cherry']\n    processed_data = processor.process_data(data)\n    print(f'Processed Data: {processed_data}')\n",
+        "callers": [
+            "main::(global)"
+        ],
+        "callees": [
+            "EXTERNAL::print",
+            "EXTERNAL::print",
+            "data_processor::DataProcessor.process_data",
+            "user::User.__init__"
+        ],
+        "file_name": "/workspace/main.py"
+    },
+    "user::User.__init__": {
+        "uid": "node_c1212be9",
+        "name": "user::User.__init__",
+        "content": "\n\ndef __init__(self, name, email):\n    self.id = uuid.uuid4()\n    self.name = name\n    self.email = email\n",
+        "callers": [
+            "main::main"
+        ],
+        "callees": [
+            "EXTERNAL::uuid.uuid4"
+        ],
+        "file_name": "/workspace/user.py"
+    },
+    "utils::validate_email": {
+        "uid": "node_b327d652",
+        "name": "utils::validate_email",
+        "content": "\n\ndef validate_email(email):\n    pattern = '^[a-z0-9]+[\\\\._]?[a-z0-9]+[@]\\\\w+[.]\\\\w+$'\n    if re.match(pattern, email):\n        return True\n    return False\n",
+        "callers": [
+            "data_processor::DataProcessor.check_emails"
+        ],
+        "callees": [
+            "EXTERNAL::re.match"
+        ],
+        "file_name": "/workspace/utils/utils.py"
+    }
+}
