@@ -11,6 +11,8 @@ jobs:
     environment: GPT
     permissions:
       contents: write 
+      issues: read
+      pull-requests: write
     name: PR comment
     if: ${{ github.event.issue.pull_request }} && startsWith(github.event.comment.body, 'Documentation ')
 
