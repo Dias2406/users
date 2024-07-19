@@ -12,6 +12,11 @@ def main():
     processor = DataProcessor()
     data = ["apple", "banana", "cherry"]
     processed_data = processor.process_data(data)
+    checked_email = user.update_email(user.email)
+    email = "dias@gcom"
+    user.update_email(email)
+    print(user)
+    print(f"Checked Email: {checked_email}")
     print(f"Processed Data: {processed_data}")
 
 if __name__ == "__main__":
