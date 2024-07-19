@@ -1,6 +1,6 @@
 # user.py
 import uuid
-form .utils import validate_email
+from .utils import validate_email
 
 """
 Contains the User class which uses the uuid library to generate unique user IDs.
