@@ -1,13 +1,15 @@
-The documentation has been reviewed for quality and accuracy. Below are the improvements made to enhance clarity and provide a more comprehensive understanding of the `User` class and its functionalities.
+The updated documentation reflects the modifications made to the `User` class within the `user.py` module. The key update pertains to the `update_email` method, which now incorporates email validation before updating a user's email address. This enhancement leverages the `validate_email` function, sourced from the `.utils` module, to ensure that the new email address adheres to appropriate standards.
 
 ---
 
 # user.py
 
 ## Source Code
+
 ```python
 # user.py
 import uuid
+from .utils import validate_email
 
 """
 Contains the User class which uses the uuid library to generate unique user IDs.
@@ -22,57 +24,53 @@ class User:
         return f"User [ID: {self.id}, Name: {self.name}, Email: {self.email}]"
     
     def update_email(self, new_email):
-        self.email = new_email
+        if validate_email(new_email):
+            self.email = new_email
 ```
 
 ## Class Definition: User
 
-The `User` class is designed to encapsulate user information, including a unique ID, name, and email address. It leverages the `uuid` library to ensure each user has a distinct identifier.
+The `User` class facilitates the management of user information, uniquely identifying each user with a UUID, alongside storing their name and email address. This class now incorporates a validation step within the email update process, ensuring that only valid email addresses are accepted.
 
 **Attributes**:
 
-- `id` (`UUID`): Automatically generated unique identifier for the user.
+- `id` (`UUID`): Uniquely generated identifier for each user instance.
 - `name` (`str`): The user's name.
 - `email` (`str`): The user's email address.
 
 **Methods**:
 
 - `__init__(self, name: str, email: str) -> None`:
-    Initializes a new instance of the `User` class.
-    - Parameters:
-        - `name` (`str`): The name of the user.
-        - `email` (`str`): The email address of the user.
-    - Returns:
-        - `None`: This method does not return a value.
-
+    - Initializes a new `User` instance with specified name and email.
+    
 - `__str__(self) -> str`:
-    Provides a string representation of the `User` instance.
-    - Returns:
-        - `str`: A formatted string that includes the user's ID, name, and email.
+    - Returns a string representation of the `User` instance, including its ID, name, and email.
 
 - `update_email(self, new_email: str) -> None`:
-    Updates the email address of the user.
+    - Attempts to update the user's email address, subject to validation.
     - Parameters:
-        - `new_email` (`str`): The new email address for the user.
-    - Returns:
-        - `None`: This method does not return a value.
+        - `new_email` (`str`): The new email address intended for the user.
+    - Behavior Change:
+        - The method now validates the new email using the `validate_email` function before updating the user's email attribute. If the new email does not pass validation, the email will not be updated.
 
-**Code Description**: The `User` class, defined in `user.py`, utilizes the `uuid` library to assign a unique identifier to each user instance at the time of creation. It includes methods for initializing a user with specific attributes (name and email), updating the user's email address, and generating a string representation of the user.
+**Code Description**: Enhancements in the `User` class involve the prudent inclusion of email validation within the `update_email` method. This method leverages `validate_email` from the `.utils` module, ensuring robustness in maintaining valid user email addresses.
 
-**Note**: The `update_email` method does not include email validation. It is recommended to validate the new email address before invoking this method to ensure it meets the required format.
+**Important Note**: The `update_email` method's ability to change a user's email is contingent on the successful validation of the new email address. It is crucial to provide a valid email format when invoking this method.
 
-**Input Example**: 
-
-```python
-new_user = User("John Doe", "john.doe@example.com")
-```
-This code snippet demonstrates how to create a new `User` instance with the name "John Doe" and the email "john.doe@example.com".
-
-**Output Example**:
+**Example Usage**:
 
 ```python
-print(new_user)
-```
-This will output: `User [ID: <unique_id>, Name: John Doe, Email: john.doe@example.com]`, where `<unique_id>` represents the actual UUID generated for the user instance.
+user = User("Jane Doe", "jane.doe@example.com")
+valid_email = "jane.newemail@example.com"
+invalid_email = "jane.newemail"
 
----
+# Attempting to update to a valid email
+user.update_email(valid_email)
+print(user)
+
+# Attempting to update to an invalid email (No change will occur)
+user.update_email(invalid_email)
+print(user)
+```
+
+In this example, the first attempt to update the email to a valid address will succeed, reflecting the change in the user's printed information. The second attempt with an invalid email will not impact the user's stored email address, demonstrating the validation process's effectiveness.
