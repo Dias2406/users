@@ -17,7 +17,7 @@ The `main` function showcases the creation of a `User` instance, the processing 
 - `User.__init__(name: str, email: str)`: Initializes a new `User` instance with the provided `name` and `email`.
 - `DataProcessor.process_data(data: list) -> list`: Accepts a list of strings as input and returns a new list with each item converted to uppercase.
 - `DataProcessor.check_emails(email: str) -> bool`: Validates if the given `email` belongs to an existing user.
-- `User.update_email(new_email: str)`: Updates the email of the `User` instance to the provided `new_email`.
+- `User.update_email(new_email: str)`: Updates the email address associated with the `User` instance to `new_email`. The update is applied immediately, and any subsequent access to the `User` instance's email will reflect this change.
 
 **Code Description**:
 The function acts as the entry point of the script, performing the following operations in sequence:
@@ -46,3 +46,4 @@ The output displays the string representation of the `User` instance, the result
 - Updated the `Code Description` section to include the new functionalities of email verification and email updating.
 - Added new called functions `DataProcessor.check_emails(email: str) -> bool` and `User.update_email(new_email: str)` to reflect the extended functionalities of the script.
 - Included additional steps in the sequence of operations to describe the email verification and update processes, ensuring a comprehensive overview of the script's capabilities.
+- Enhanced the description of `User.update_email(new_email: str)` to provide more detail about the immediate effect of updating a user's email address and how it impacts subsequent access to the user's email attribute.
