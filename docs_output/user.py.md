@@ -1,13 +1,10 @@
-The documentation provided for the `User` class in `user.py` is comprehensive and well-structured, offering clear insights into the class's purpose, attributes, and methods. However, there are a few areas where the documentation can be enhanced for clarity and completeness. Below are the improvements made to the original documentation:
-
----
-
 # user.py
 
 ## Source Code
 ```python
 # user.py
 import uuid
+from .utils import validate_email
 
 """
 Contains the User class which uses the uuid library to generate unique user IDs.
@@ -22,7 +19,8 @@ class User:
         return f"User [ID: {self.id}, Name: {self.name}, Email: {self.email}]"
     
     def update_email(self, new_email):
-        self.email = new_email
+        if validate_email(new_email):
+            self.email = new_email
 ```
 
 ## Class Definition: User
@@ -50,14 +48,13 @@ The `User` class is designed to encapsulate user information within an applicati
         - `str`: A formatted string that includes the user's ID, name, and email.
 
 - `update_email(self, new_email: str) -> None`:
-    Updates the email address of the user.
+    Updates the email address of the user, subject to validation of the new email address.
     - Parameters:
         - `new_email` (`str`): The new email address to be assigned to the user.
-    - Returns: None. This method updates the `email` attribute of the `User` instance.
+    - Returns: None. This method updates the `email` attribute of the `User` instance only if the new email address passes validation.
+    - Note: The email validation utilizes the `validate_email` function imported from `.utils`. It is essential to ensure the new email adheres to standard email format conventions before updating.
 
-**Code Description**: This class leverages the `uuid` library to ensure each user instance is assigned a unique identifier (`id`). It provides functionality to update a user's email address and to represent the user instance as a string, which includes the user's unique ID, name, and email address.
-
-**Note**: Before using the `update_email` method, it is recommended to validate the new email address to ensure it adheres to standard email format conventions.
+**Code Description**: This class leverages the `uuid` library to ensure each user instance is assigned a unique identifier (`id`). It provides functionality to update a user's email address, subject to email validation, and to represent the user instance as a string, which includes the user's unique ID, name, and email address.
 
 **Input Example**: 
 
@@ -73,6 +70,4 @@ print(new_user)
 ```
 This will produce an output similar to: `User [ID: 123e4567-e89b-12d3-a456-426614174000, Name: John Doe, Email: john.doe@example.com]`. Note that the ID will be a unique UUID value generated for each user instance.
 
---- 
-
-These enhancements aim to provide clearer explanations and ensure that the documentation is as informative and user-friendly as possible.
+These documentation updates ensure that the descriptions accurately reflect the enhancements made to the `User` class, particularly regarding the conditional email updating mechanism which now incorporates email validation.
