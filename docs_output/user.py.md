@@ -1,31 +1,6 @@
-Based on the provided changes in the code for the `User` class in `user.py`, the documentation has been updated as follows to reflect the new functionality and code modifications:
-
 ---
 
 # user.py
-
-## Source Code
-
-```python
-import uuid
-from utils import validate_email
-
-"""
-Contains the User class which uses the uuid library to generate unique user IDs.
-"""
-class User:
-    def __init__(self, name, email):
-        self.id = uuid.uuid4()
-        self.name = name
-        self.email = email
-    
-    def __str__(self):
-        return f"User [ID: {self.id}, Name: {self.name}, Email: {self.email}]"
-    
-    def update_email(self, new_email):
-        if validate_email(new_email):
-            self.email = new_email
-```
 
 ## Class Definition: User
 
@@ -55,7 +30,7 @@ The `User` class is designed to represent a user entity with a unique ID, name, 
 
 **Code Description**: The `User` class encapsulates user-related data, providing functionality to update a user's email address post-creation, now with added email validation. Unique user IDs are generated using `uuid.uuid4()`, ensuring each user instance is uniquely identifiable.
 
-**Note on Email Validation**: The `validate_email` function imported from the `utils` module is used to verify the format of the new email address before updating the user's email attribute. This ensures that the email address adheres to a specified format and criteria set within `validate_email`.
+**Note on Email Validation**: The `validate_email` function imported from the `utils` module is used to verify the format of the new email address before updating the user's email attribute. This ensures that the email address adheres to a specified format, and criteria set within `validate_email`.
 
 **Input Example**: 
 
@@ -75,4 +50,4 @@ Outputs: `User [ID: <unique_id>, Name: John Doe, Email: johndoe@example.com]`, w
 
 --- 
 
-This documentation update accurately reflects the integration of the email validation functionality and the import of the `validate_email` function, along with maintaining the structure and details of the unaffected sections from the original documentation.
+This revised documentation reflects the removal of source code from the documentation while preserving the comprehensive details and descriptions of the `User` class and its functionalities.
