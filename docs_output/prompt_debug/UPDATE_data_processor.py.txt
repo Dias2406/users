@@ -1,3 +1,20 @@
+The user has requested an update for the documentation in the file /workspace/data_processor.py with the following comment:
+Give more input and output examples
+Please update the documentation accordingly. The current content of the file is as follows:
+# data_processor.py
+from .utils import validate_email
+
+"""
+Contains the DataProcessor class which has methods for processing data and checking the validity of email addresses using the function from utils.py.
+"""
+class DataProcessor:
+    def process_data(self, data):
+        return [item.upper() for item in data]
+    
+    def check_emails(self, emails):
+        return [validate_email(email) for email in emails]
+
+The old documentation is as follows:
 # Data Processor Documentation
 
 ## Overview
@@ -47,38 +64,20 @@ The accuracy of the `check_emails` method's output heavily relies on the `valida
 
 ### Input and Output Examples
 
-#### Example 1:
-
-- **Input**:
+- **Input Example**:
 
     ```python
     data = ["apple", "banana", "cherry"]
     emails = ["user@example.com", "invalid-email", "another@valid.com"]
     ```
 
-- **Output**:
+- **Output Example**:
 
     ```python
     Processed data: ["APPLE", "BANANA", "CHERRY"]
     Email validation: [True, False, True]
     ```
 
-#### Example 2:
-
-- **Input**:
-
-    ```python
-    data = ["pear", "grape", "watermelon"]
-    emails = ["test@domain.com", "not-an-email", "example@test.net"]
-    ```
-
-- **Output**:
-
-    ```python
-    Processed data: ["PEAR", "GRAPE", "WATERMELON"]
-    Email validation: [True, False, True]
-    ```
-
-These examples demonstrate the `DataProcessor` class's capability to transform text data and validate lists of email addresses. By providing additional input and output examples, users can better understand how to apply these methods to their datasets.
-
 This documentation aims to provide a clear and comprehensive guide to the `DataProcessor` class, detailing its methods, functionalities, and practical applications in data processing and email validation tasks.
+
+Please provide the updated documentation content. DO NOT CHANGE ANYTHING IN THE OLD DOCUMENTATION THAT HAS NOT BEEN MENTIONED IN THE COMMENT.
