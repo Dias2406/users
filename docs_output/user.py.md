@@ -1,13 +1,14 @@
-The documentation provided for the `User` class in `user.py` is comprehensive and well-structured, offering clear insights into the class's purpose, attributes, and methods. However, there are a few areas where the documentation can be slightly improved for clarity and completeness. Below are the enhancements made to the original documentation:
+Based on the provided changes in the code for the `User` class in `user.py`, the documentation has been updated as follows to reflect the new functionality and code modifications:
 
 ---
 
 # user.py
 
 ## Source Code
+
 ```python
-# user.py
 import uuid
+from utils import validate_email
 
 """
 Contains the User class which uses the uuid library to generate unique user IDs.
@@ -22,12 +23,13 @@ class User:
         return f"User [ID: {self.id}, Name: {self.name}, Email: {self.email}]"
     
     def update_email(self, new_email):
-        self.email = new_email
+        if validate_email(new_email):
+            self.email = new_email
 ```
 
 ## Class Definition: User
 
-The `User` class is designed to represent a user entity with a unique ID, name, and email address. It leverages the `uuid` library to ensure each user is assigned a distinct identifier.
+The `User` class is designed to represent a user entity with a unique ID, name, and email address. It leverages the `uuid` library to ensure each user is assigned a distinct identifier. The class now integrates email validation during email updates by utilizing a newly imported `validate_email` function from the `utils` module.
 
 **Attributes**:
 
@@ -38,28 +40,22 @@ The `User` class is designed to represent a user entity with a unique ID, name, 
 **Methods**:
 
 - `__init__(self, name: str, email: str) -> None`:
-    Initializes a new instance of the `User` class.
-    - Parameters:
-        - `name` (`str`): The name of the user.
-        - `email` (`str`): The email address of the user.
-    - Returns:
-        - `None`: This method does not return a value.
-
+    Initializes a new instance of the `User` class. The parameters and return value remain unchanged.
+    
 - `__str__(self) -> str`:
-    Provides a string representation of the `User` instance.
-    - Returns:
-        - `str`: A formatted string that includes the user's ID, name, and email.
-
+    Provides a string representation of the `User` instance. The functionality and return value remain unchanged.
+    
 - `update_email(self, new_email: str) -> None`:
-    Updates the email address of the user.
+    Updates the email address of the user, now including a validation check through the `validate_email` function before updating the user's email attribute.
     - Parameters:
         - `new_email` (`str`): The new email address to be set for the user.
     - Returns:
         - `None`: This method does not return a value.
+    - Note: If the `new_email` does not pass validation, the user's email is not updated.
 
-**Code Description**: The `User` class encapsulates user-related data and provides functionality to update a user's email address post-creation. Unique user IDs are generated using `uuid.uuid4()`, ensuring each user instance is uniquely identifiable.
+**Code Description**: The `User` class encapsulates user-related data, providing functionality to update a user's email address post-creation, now with added email validation. Unique user IDs are generated using `uuid.uuid4()`, ensuring each user instance is uniquely identifiable.
 
-**Note**: The `uuid.uuid4()` method is used to generate a random UUID for each user instance, guaranteeing uniqueness.
+**Note on Email Validation**: The `validate_email` function imported from the `utils` module is used to verify the format of the new email address before updating the user's email attribute. This ensures that the email address adheres to a specified format and criteria set within `validate_email`.
 
 **Input Example**: 
 
@@ -73,8 +69,10 @@ This code snippet demonstrates how to create a new `User` instance with the name
 ```python
 print(user1)
 ```
-This will output: `User [ID: <unique_id>, Name: John Doe, Email: johndoe@example.com]`, where `<unique_id>` represents the UUID generated for this particular user instance.
+Outputs: `User [ID: <unique_id>, Name: John Doe, Email: johndoe@example.com]`, where `<unique_id>` represents the UUID generated for this particular user instance.
+
+**Additional Note**: The integration of `validate_email` requires that any updates to a user's email address must now pass the validation check to be successful, enhancing data integrity and consistency for user email addresses.
 
 --- 
 
-These enhancements aim to maintain the original structure while providing additional clarity and detail where necessary.
+This documentation update accurately reflects the integration of the email validation functionality and the import of the `validate_email` function, along with maintaining the structure and details of the unaffected sections from the original documentation.
