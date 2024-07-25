@@ -1,0 +1,56 @@
+# data_processor.py
+
+## ClassDef DataProcessor
+
+The function of the class is to provide methods for processing data and validating email addresses.
+
+**Attributes**:
+
+This class does not explicitly define any attributes.
+
+**Functions**:
+
+- `process_data(self, data)` -> `List[str]`
+    - Parameters:
+        - `data` (`List[str]`): A list of strings to be processed.
+    - Returns:
+        - `List[str]`: A new list with each item from the input list converted to uppercase.
+
+- `check_emails(self, emails)` -> `List[bool]`
+    - Parameters:
+        - `emails` (`List[str]`): A list of email addresses to be validated.
+    - Returns:
+        - `List[bool]`: A list of boolean values indicating the validity of each email address.
+
+**Called_functions**:
+
+- `validate_email(email: str) -> bool`: Checks if the given email address matches a specific pattern indicating a valid email format. Returns `True` if the email is valid, otherwise `False`.
+
+**Code Description**: The `DataProcessor` class provides two main functionalities. The `process_data` method processes a list of strings by converting each string to uppercase. The `check_emails` method validates a list of email addresses by utilizing the `validate_email` function from the `utils` module, returning a list indicating the validity of each email.
+
+**Note**: The `validate_email` function used in `check_emails` method relies on a regular expression to validate email formats. Ensure that the email addresses are in string format before passing them to the `check_emails` method.
+
+**Input Example**: 
+
+```
+data_processor = DataProcessor()
+data = ["hello", "world"]
+emails = ["test@example.com", "invalidemail@"]
+
+# Processing data
+processed_data = data_processor.process_data(data)
+print(processed_data)
+
+# Checking emails
+email_validity = data_processor.check_emails(emails)
+print(email_validity)
+```
+
+**Output Example**:
+
+```
+['HELLO', 'WORLD']
+[True, False]
+```
+
+This example demonstrates how to use the `DataProcessor` class to process a list of strings by converting them to uppercase and to validate a list of email addresses, indicating which ones are valid.
