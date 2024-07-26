@@ -15,17 +15,18 @@ class DataProcessor:
 ```
 
 Explanation of code context:
-This Python file defines a class named `DataProcessor` that contains methods for processing data and validating email addresses. The class has two methods:
-- `process_data(self, data)`: This method takes a list of data items as input and returns a new list with each item converted to uppercase. This method is useful for standardizing the format of data items.
-- `check_emails(self, emails)`: This method takes a list of email addresses as input and checks the validity of each email address using the `validate_email` function imported from the `utils` module. It returns a list of boolean values indicating whether each email address is valid.
+The Python file `data_processor.py` defines a class named `DataProcessor` that contains methods for processing data and validating email addresses. It has two methods:
+- `process_data(self, data)`: Takes a list of data items as input and returns a new list with each item converted to uppercase.
+- `check_emails(self, emails)`: Takes a list of email addresses as input and checks the validity of each email address using the `validate_email` function imported from `utils.py`. It returns a list of boolean values indicating the validity of each email address.
 
 Callee function information:
-The callee function in this context is `validate_email` from the `utils` module. Here is a brief description of its functionality and usage:
 ```python
+Function/Class utils::validate_email:
+
 def validate_email(email):
     pattern = '^[a-z0-9]+[\\._]?[a-z0-9]+[@]\\w+[.]\\w+$'
     if re.match(pattern, email):
         return True
     return False
 ```
-The `validate_email` function checks if the given email address matches a specific pattern that represents a valid email format. It uses a regular expression to match the email address against the pattern. If the email address matches the pattern, the function returns `True`, indicating that the email is valid. Otherwise, it returns `False`. This function is used by the `DataProcessor` class to validate email addresses in the `check_emails` method.
+The callee function `validate_email` in `utils.py` is used by the `DataProcessor` class to validate email addresses. It defines a regular expression pattern to match valid email addresses. If an email address matches the pattern, the function returns `True`, indicating the email is valid; otherwise, it returns `False`.

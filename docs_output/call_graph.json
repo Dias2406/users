@@ -30,7 +30,7 @@
         "file_name": "EXTERNAL"
     },
     "data_processor::DataProcessor.check_emails": {
-        "uid": "node_d974d6fc",
+        "uid": "node_c973355b",
         "name": "data_processor::DataProcessor.check_emails",
         "content": "\n\ndef check_emails(self, emails):\n    return [validate_email(email) for email in emails]\n",
         "callers": [],
@@ -40,7 +40,7 @@
         "file_name": "/workspace/data_processor.py"
     },
     "data_processor::DataProcessor.process_data": {
-        "uid": "node_4178f764",
+        "uid": "node_f3e11beb",
         "name": "data_processor::DataProcessor.process_data",
         "content": "\n\ndef process_data(self, data):\n    return [item.upper() for item in data]\n",
         "callers": [
@@ -50,7 +50,7 @@
         "file_name": "/workspace/data_processor.py"
     },
     "main::(global)": {
-        "uid": "node_a04e33dc",
+        "uid": "node_6f8a4951",
         "name": "main::(global)",
         "content": "",
         "callers": [],
@@ -60,7 +60,7 @@
         "file_name": "/workspace/main.py"
     },
     "main::main": {
-        "uid": "node_a1409f0e",
+        "uid": "node_7b022afa",
         "name": "main::main",
         "content": "\n\ndef main():\n    user = User('John Doe', 'john.doe@example.com')\n    print(user)\n    processor = DataProcessor()\n    data = ['apple', 'banana', 'cherry']\n    processed_data = processor.process_data(data)\n    print(f'Processed Data: {processed_data}')\n",
         "callers": [
@@ -75,7 +75,7 @@
         "file_name": "/workspace/main.py"
     },
     "user::User.__init__": {
-        "uid": "node_f3fbc02a",
+        "uid": "node_b6f48b69",
         "name": "user::User.__init__",
         "content": "\n\ndef __init__(self, name, email):\n    self.id = uuid.uuid4()\n    self.name = name\n    self.email = email\n",
         "callers": [
@@ -87,7 +87,7 @@
         "file_name": "/workspace/user.py"
     },
     "utils::validate_email": {
-        "uid": "node_17322166",
+        "uid": "node_8ba1485f",
         "name": "utils::validate_email",
         "content": "\n\ndef validate_email(email):\n    pattern = '^[a-z0-9]+[\\\\._]?[a-z0-9]+[@]\\\\w+[.]\\\\w+$'\n    if re.match(pattern, email):\n        return True\n    return False\n",
         "callers": [

@@ -41,27 +41,35 @@ None.
 
 **Returns**:
 
-None. This function does not return any value but prints the user information and processed data to the console.
+None.
 
 **Called_functions**:
 
-- `User.__init__(name: str, email: str)`: Initializes a new instance of the `User` class with a unique ID, name, and email address.
-- `DataProcessor.process_data(data: list) -> list`: Takes a list of data items as input and returns a new list with each item converted to uppercase.
+- `User.__init__(name: str, email: str)`: Initializes a new User instance with a unique ID, name, and email address.
+- `DataProcessor.process_data(data: list) -> list`: Processes a list of data items by converting each item to uppercase.
 
-**Code Description**: The `main` function serves as the entry point of the script. It first creates an instance of the `User` class with predefined name and email values. It then prints this user instance, which likely triggers the `__str__` or `__repr__` method of the `User` class to display user information. Following this, the function creates an instance of the `DataProcessor` class and defines a list of data items. This list is passed to the `process_data` method of the `DataProcessor` instance, which processes the data by converting each item to uppercase. Finally, the processed data is printed to the console.
+**Code Description**: This function serves as the entry point of the script. It performs the following actions:
+1. Creates a `User` instance with a specified name and email.
+2. Prints the `User` instance to the console.
+3. Creates a `DataProcessor` instance.
+4. Defines a list of data items and uses the `DataProcessor` instance to process this data by converting each item to uppercase.
+5. Prints the processed data to the console.
 
-**Note**: This script demonstrates the basic usage of class instances and method calls in Python. It is important to ensure that the `user` and `data_processor` modules are correctly implemented and available in the project directory for this script to run successfully.
+**Note**: This script requires the `user.py` and `data_processor.py` files to be present in the same directory for the `User` and `DataProcessor` classes, respectively.
 
 **Input Example**: 
 
 ```
-No direct input is provided to the `main` function. However, it internally uses a list of strings ["apple", "banana", "cherry"] as input to the `process_data` method.
+No direct input is provided to this function. However, it internally uses a list of strings as input to the DataProcessor.process_data function.
 ```
 
 **Output Example**: 
 
 ```
-<User instance information>
+User instance printed to the console, followed by the processed data list in uppercase.
+Example:
+<User object at 0x7fcd3e4>
 Processed Data: ['APPLE', 'BANANA', 'CHERRY']
 ```
-The exact output for the user instance depends on the implementation of the `__str__` or `__repr__` method within the `User` class. The processed data output shows the list of original data items converted to uppercase.
+
+This documentation provides a concise overview of the `main.py` script, detailing its functionality, the parameters and returns of its main function, and examples of input and output. It also includes notes on the script's dependencies and operation.

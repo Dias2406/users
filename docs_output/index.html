@@ -303,27 +303,27 @@
 <p><strong>Functions</strong>:</p>
 <ul>
 <li>
-<p><code>process_data(self, data)</code> -&gt; <code>List[str]</code></p>
+<p><code>process_data</code>(self, <code>data</code>: <code>list</code>) -&gt; <code>list</code></p>
 <ul>
 <li>Parameters:<ul>
-<li><code>data</code> (<code>List[str]</code>): A list of data items (strings).</li>
+<li><code>data</code> (<code>list</code>): A list of data items to be processed.</li>
 </ul>
 </li>
 <li>Returns:<ul>
-<li><code>List[str]</code>: A new list with each item from the input list converted to uppercase.</li>
+<li><code>list</code>: A new list with each item from the input list converted to uppercase.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><code>check_emails(self, emails)</code> -&gt; <code>List[bool]</code></p>
+<p><code>check_emails</code>(self, <code>emails</code>: <code>list</code>) -&gt; <code>list</code></p>
 <ul>
 <li>Parameters:<ul>
-<li><code>emails</code> (<code>List[str]</code>): A list of email addresses.</li>
+<li><code>emails</code> (<code>list</code>): A list of email addresses to be validated.</li>
 </ul>
 </li>
 <li>Returns:<ul>
-<li><code>List[bool]</code>: A list of boolean values indicating the validity of each email address.</li>
+<li><code>list</code>: A list of boolean values indicating the validity of each email address.</li>
 </ul>
 </li>
 </ul>
@@ -331,23 +331,23 @@
 </ul>
 <p><strong>Called_functions</strong>:</p>
 <ul>
-<li><code>validate_email(email: str) -&gt; bool</code>: Checks if the given email address matches a specific pattern that represents a valid email format. Returns <code>True</code> if the email is valid, otherwise <code>False</code>.</li>
+<li><code>validate_email</code>(<code>email</code>: <code>str</code>) -&gt; <code>bool</code>: Validates an email address against a regular expression pattern and returns <code>True</code> if the email is valid, otherwise <code>False</code>.</li>
 </ul>
-<p><strong>Code Description</strong>: The <code>DataProcessor</code> class contains two methods, <code>process_data</code> and <code>check_emails</code>. The <code>process_data</code> method is used for converting each item in a given list to uppercase, which can be useful for standardizing data formats. The <code>check_emails</code> method validates each email address in a given list using the <code>validate_email</code> function from the <code>utils</code> module, returning a list of boolean values indicating the validity of each email.</p>
-<p><strong>Note</strong>: It's important to ensure that the email addresses provided to the <code>check_emails</code> method are in a format that the <code>validate_email</code> function can process.</p>
+<p><strong>Code Description</strong>: The <code>DataProcessor</code> class contains two methods: <code>process_data</code> for converting data items in a list to uppercase, and <code>check_emails</code> for validating a list of email addresses using the <code>validate_email</code> function from <code>utils.py</code>. The <code>validate_email</code> function uses a regular expression to determine the validity of each email address.</p>
+<p><strong>Note</strong>: It is important to ensure that the data passed to <code>process_data</code> is a list of strings to avoid type errors. Similarly, for <code>check_emails</code>, ensure that a list of valid email address strings is passed for accurate validation.</p>
 <p><strong>Input Example</strong>: </p>
 <pre><code>data = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
-emails = [&quot;test@example.com&quot;, &quot;invalid-email&quot;, &quot;another@test.com&quot;]
+emails = [&quot;test@example.com&quot;, &quot;invalid-email&quot;]
 
 processor = DataProcessor()
 print(processor.process_data(data))
 print(processor.check_emails(emails))
 </code></pre>
-<p><strong>Output Example</strong>: </p>
+<p><strong>Output Example</strong>:</p>
 <pre><code>['APPLE', 'BANANA', 'CHERRY']
-[True, False, True]
+[True, False]
 </code></pre>
-<p>This example demonstrates how to use the <code>DataProcessor</code> class to convert a list of strings to uppercase and to validate a list of email addresses. The <code>process_data</code> method returns a new list with each item in uppercase, and the <code>check_emails</code> method returns a list of boolean values indicating the validity of each email address based on the <code>validate_email</code> function's criteria.</p>
+<p>This example demonstrates how to use the <code>DataProcessor</code> class to convert a list of strings to uppercase and validate a list of email addresses, showing the expected output for each method.</p>
     </div>
 </div><div class="file-card" id="file-main-py">
     <summary id=main-py>
@@ -361,26 +361,33 @@ print(processor.check_emails(emails))
     <div class="content">
         <h1>main.py</h1>
 <h2>FunctionDef main</h2>
-<p>The function's purpose is to instantiate a User object and process a list of data using the DataProcessor class.</p>
+<p>The function's primary purpose is to instantiate a User object and to process a predefined list of data using the DataProcessor class.</p>
 <p><strong>Parameters</strong>:</p>
 <p>None.</p>
 <p><strong>Returns</strong>:</p>
-<p>None. This function outputs the user information and processed data to the console instead of returning any value.</p>
+<p>None.</p>
 <p><strong>Called_functions</strong>:</p>
 <ul>
-<li><code>User.__init__(name: str, email: str)</code>: Creates a new User object with specified name and email.</li>
-<li><code>DataProcessor.process_data(data: list) -&gt; list</code>: Accepts a list of strings as input and returns a modified list where each string is converted to uppercase.</li>
+<li><code>User.__init__(name: str, email: str)</code>: This method initializes a new User instance, assigning it a unique ID, name, and email address.</li>
+<li><code>DataProcessor.process_data(data: list) -&gt; list</code>: This method takes a list of data items as input and returns a new list with each item converted to uppercase.</li>
 </ul>
-<p><strong>Code Description</strong>: At the start, the <code>main</code> function initializes a User object with a given name and email. It then prints this object, which implicitly calls the User class's <code>__str__</code> or <code>__repr__</code> method to display the user's details. Subsequently, a DataProcessor object is instantiated, and a predefined list of strings is processed through its <code>process_data</code> method. This method transforms each string in the list to uppercase. The function concludes by printing the processed list to the console.</p>
-<p><strong>Note</strong>: This script is a simple demonstration of using class instances and invoking their methods in Python. For the script to execute as intended, the <code>user</code> and <code>data_processor</code> modules must be properly implemented and present in the project directory.</p>
+<p><strong>Code Description</strong>: This function acts as the entry point for the script, executing a series of steps:
+1. Instantiates a <code>User</code> object with a given name and email.
+2. Outputs the <code>User</code> object to the console.
+3. Instantiates a <code>DataProcessor</code> object.
+4. Prepares a list of data items and passes it to the <code>DataProcessor</code> object for processing, which converts each item to uppercase.
+5. Outputs the processed data to the console.</p>
+<p><strong>Note</strong>: Execution of this script requires the presence of <code>user.py</code> and <code>data_processor.py</code> in the same directory, which contain the definitions for the <code>User</code> and <code>DataProcessor</code> classes, respectively.</p>
 <p><strong>Input Example</strong>: </p>
-<pre><code>The `main` function does not accept direct input. Internally, it utilizes a list of strings [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;] as input for the `process_data` method.
+<pre><code>There is no direct input to this function. It internally utilizes a list of strings as input for the DataProcessor.process_data function.
 </code></pre>
 <p><strong>Output Example</strong>: </p>
-<pre><code>&lt;User instance information&gt;
+<pre><code>The output includes a representation of the User instance printed to the console, followed by a list of the processed data in uppercase.
+Example:
+&lt;User object at 0x7fcd3e4&gt;
 Processed Data: ['APPLE', 'BANANA', 'CHERRY']
 </code></pre>
-<p>The output for the user instance will vary based on the <code>User</code> class's <code>__str__</code> or <code>__repr__</code> method implementation. The processed data output illustrates the conversion of the original list items to uppercase.</p>
+<p>This documentation offers a detailed explanation of the <code>main.py</code> script, including its functionality, the parameters and returns of its main function, and examples of input and output. It further elaborates on the script's dependencies and operational requirements.</p>
     </div>
 </div><div class="file-card" id="file-user-py">
     <summary id=user-py>
@@ -397,14 +404,14 @@ Processed Data: ['APPLE', 'BANANA', 'CHERRY']
 <p>The function of the class is to represent a user with a unique ID, name, and email address.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
-<li><code>id</code> (<code>uuid.UUID</code>): A unique identifier for the user, generated using the <code>uuid</code> library.</li>
+<li><code>id</code> (<code>UUID</code>): A unique identifier for the user, generated using the uuid library.</li>
 <li><code>name</code> (<code>str</code>): The name of the user.</li>
 <li><code>email</code> (<code>str</code>): The email address of the user.</li>
 </ul>
 <p><strong>Functions</strong>:</p>
 <ul>
 <li>
-<p><code>__init__(self, name, email)</code> -&gt; <code>None</code></p>
+<p><code>__init__</code>(self, <code>name</code>: <code>str</code>, <code>email</code>: <code>str</code>) -&gt; <code>None</code></p>
 <ul>
 <li>Parameters:<ul>
 <li><code>name</code> (<code>str</code>): The name of the user.</li>
@@ -412,47 +419,44 @@ Processed Data: ['APPLE', 'BANANA', 'CHERRY']
 </ul>
 </li>
 <li>Returns:<ul>
-<li><code>None</code>: This method initializes a new <code>User</code> instance.</li>
+<li><code>None</code>: This method initializes a new User instance.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><code>__str__(self)</code> -&gt; <code>str</code></p>
+<p><code>__str__</code>(self) -&gt; <code>str</code></p>
 <ul>
 <li>Returns:<ul>
-<li><code>str</code>: A string representation of the <code>User</code> instance, including its ID, name, and email address.</li>
+<li><code>str</code>: A string representation of the User instance.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><code>update_email(self, new_email)</code> -&gt; <code>None</code></p>
+<p><code>update_email</code>(self, <code>new_email</code>: <code>str</code>) -&gt; <code>None</code></p>
 <ul>
 <li>Parameters:<ul>
 <li><code>new_email</code> (<code>str</code>): The new email address for the user.</li>
 </ul>
 </li>
 <li>Returns:<ul>
-<li><code>None</code>: This method updates the email address of the <code>User</code> instance.</li>
+<li><code>None</code>: This method updates the email address of the User instance.</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p><strong>Code Description</strong>: The <code>User</code> class is designed to encapsulate the details of a user, including a unique identifier (ID), name, and email address. It uses the <code>uuid</code> library to generate a unique ID for each instance, ensuring that each user can be uniquely identified. The class provides a method to update the user's email address, allowing for changes to user information after instantiation.</p>
-<p><strong>Note</strong>: The unique ID generated for each user instance ensures that even users with identical names and email addresses can be distinguished.</p>
+<p><strong>Code Description</strong>: The <code>User</code> class uses the <code>uuid</code> library to generate a unique identifier for each user instance upon creation. It provides a method to update the user's email address. The <code>__str__</code> method allows for a readable string representation of the user, including their unique ID, name, and email address.</p>
+<p><strong>Note</strong>: It's important to ensure that the email address provided is valid and in the correct format before updating it to avoid potential issues.</p>
 <p><strong>Input Example</strong>: </p>
 <pre><code>user1 = User(&quot;John Doe&quot;, &quot;john.doe@example.com&quot;)
 </code></pre>
-<p>This example creates a new <code>User</code> instance with the name "John Doe" and the email address "john.doe@example.com".</p>
+<p>This example creates a new User instance with the name "John Doe" and the email address "john.doe@example.com".</p>
 <p><strong>Output Example</strong>:</p>
-<pre><code>print(user1)
-</code></pre>
-<p>This would output something similar to:</p>
 <pre><code>User [ID: 123e4567-e89b-12d3-a456-426614174000, Name: John Doe, Email: john.doe@example.com]
 </code></pre>
-<p>This output shows the string representation of the <code>User</code> instance, including its unique ID, name, and email address.</p>
+<p>This output is a string representation of the User instance, showing the unique ID, name, and email address of the user.</p>
     </div>
 </div><div class="file-card" id="file-utils-utils-py">
     <summary id=utils-utils-py>
@@ -473,18 +477,18 @@ Processed Data: ['APPLE', 'BANANA', 'CHERRY']
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>bool</code>: Returns <code>True</code> if the email is valid according to the regex pattern, otherwise returns <code>False</code>.</li>
+<li><code>bool</code>: Returns <code>True</code> if the email address matches the specified regular expression pattern, indicating it is valid. Otherwise, it returns <code>False</code>, indicating the email address is invalid.</li>
 </ul>
-<p><strong>Code Description</strong>: The <code>validate_email</code> function employs a regular expression (regex) pattern to determine if a given email address adheres to a standard format considered valid for email addresses. The regex pattern specifies that a valid email must start with one or more alphanumeric characters, optionally followed by a period (<code>.</code>) or underscore (<code>_</code>), and then more alphanumeric characters. This is followed by the <code>@</code> symbol, more alphanumeric characters, a period, and finally, more alphanumeric characters. The function uses the <code>re.match</code> method from the <code>re</code> module to compare the provided email address against this pattern. If the email address fits the pattern, the function returns <code>True</code>, signifying the email is valid. If not, it returns <code>False</code>.</p>
-<p><strong>Note</strong>: This function is particularly useful in scenarios where validating the format of email addresses is critical, such as during user registration processes on websites or applications.</p>
+<p><strong>Code Description</strong>: This function employs a regular expression pattern to validate email addresses. The pattern mandates that the email must start with alphanumeric characters, which can optionally be followed by a period (<code>.</code>) or underscore (<code>_</code>). This is then followed by the <code>@</code> symbol, and finally, a domain name that includes at least one period. The validation is performed using the <code>re.match</code> method from the <code>re</code> module. If the email address conforms to the pattern, the function returns <code>True</code>, signifying the email is valid. Conversely, if the email address does not conform to the pattern, the function returns <code>False</code>, signifying the email is invalid.</p>
+<p><strong>Note</strong>: This validation approach may not encompass all valid email formats as outlined by the RFC standards. It provides a basic level of validation, focusing on common email address patterns.</p>
 <p><strong>Input Example</strong>: </p>
-<pre><code>email = &quot;example_user@example.com&quot;
+<pre><code>validate_email(&quot;example@domain.com&quot;)
 </code></pre>
-<p>This example demonstrates a string input representing an email address that needs validation.</p>
+<p>This example illustrates the usage of the <code>validate_email</code> function by passing a string that represents an email address. The function then assesses whether this email address adheres to the predefined pattern.</p>
 <p><strong>Output Example</strong>: </p>
 <pre><code>True
 </code></pre>
-<p>This output signifies that the email address provided in the input example adheres to the regex pattern defined for valid email addresses, thus it is considered valid.</p>
+<p>In this example, the email address "example@domain.com" is deemed valid based on the pattern utilized in the <code>validate_email</code> function, resulting in a return value of <code>True</code>.</p>
     </div>
 </div>
     </div>

@@ -10,42 +10,42 @@ This class does not explicitly define any attributes.
 
 **Functions**:
 
-- `process_data(self, data)` -> `List[str]`
+- `process_data`(self, `data`: `list`) -> `list`
     - Parameters:
-        - `data` (`List[str]`): A list of data items (strings).
+        - `data` (`list`): A list of data items to be processed.
     - Returns:
-        - `List[str]`: A new list with each item from the input list converted to uppercase.
+        - `list`: A new list with each item from the input list converted to uppercase.
 
-- `check_emails(self, emails)` -> `List[bool]`
+- `check_emails`(self, `emails`: `list`) -> `list`
     - Parameters:
-        - `emails` (`List[str]`): A list of email addresses.
+        - `emails` (`list`): A list of email addresses to be validated.
     - Returns:
-        - `List[bool]`: A list of boolean values indicating the validity of each email address.
+        - `list`: A list of boolean values indicating the validity of each email address.
 
 **Called_functions**:
 
-- `validate_email(email: str) -> bool`: Checks if the given email address matches a specific pattern that represents a valid email format. Returns `True` if the email is valid, otherwise `False`.
+- `validate_email`(`email`: `str`) -> `bool`: Validates an email address against a regular expression pattern and returns `True` if the email is valid, otherwise `False`.
 
-**Code Description**: The `DataProcessor` class contains two methods, `process_data` and `check_emails`. The `process_data` method is used for converting each item in a given list to uppercase, which can be useful for standardizing data formats. The `check_emails` method validates each email address in a given list using the `validate_email` function from the `utils` module, returning a list of boolean values indicating the validity of each email.
+**Code Description**: The `DataProcessor` class contains two methods: `process_data` for converting data items in a list to uppercase, and `check_emails` for validating a list of email addresses using the `validate_email` function from `utils.py`. The `validate_email` function uses a regular expression to determine the validity of each email address.
 
-**Note**: It's important to ensure that the email addresses provided to the `check_emails` method are in a format that the `validate_email` function can process.
+**Note**: It is important to ensure that the data passed to `process_data` is a list of strings to avoid type errors. Similarly, for `check_emails`, ensure that a list of valid email address strings is passed for accurate validation.
 
 **Input Example**: 
 
 ```
 data = ["apple", "banana", "cherry"]
-emails = ["test@example.com", "invalid-email", "another@test.com"]
+emails = ["test@example.com", "invalid-email"]
 
 processor = DataProcessor()
 print(processor.process_data(data))
 print(processor.check_emails(emails))
 ```
 
-**Output Example**: 
+**Output Example**:
 
 ```
 ['APPLE', 'BANANA', 'CHERRY']
-[True, False, True]
+[True, False]
 ```
 
-This example demonstrates how to use the `DataProcessor` class to convert a list of strings to uppercase and to validate a list of email addresses. The `process_data` method returns a new list with each item in uppercase, and the `check_emails` method returns a list of boolean values indicating the validity of each email address based on the `validate_email` function's criteria.
+This example demonstrates how to use the `DataProcessor` class to convert a list of strings to uppercase and validate a list of email addresses, showing the expected output for each method.

@@ -34,22 +34,22 @@ The function of the function is to validate email addresses using regular expres
 
 **Returns**:
 
-- `bool`: Returns `True` if the email is valid according to the regex pattern, otherwise returns `False`.
+- `bool`: Returns `True` if the email address is valid according to the specified pattern, otherwise returns `False`.
 
-**Code Description**: The `validate_email` function is designed to check if a given email address conforms to a specific pattern that represents a valid email format. It uses a regular expression (regex) pattern to match the email address. The pattern allows for alphanumeric characters at the beginning, optionally followed by a dot (`.`) or underscore (`_`), then more alphanumeric characters, followed by an `@` symbol, then more alphanumeric characters, a dot, and finally, more alphanumeric characters. This pattern is intended to match common email address formats. The function utilizes the `re.match` method from Python's built-in `re` module to perform the matching operation. If the email address matches the pattern, the function returns `True`, indicating that the email address is valid. Otherwise, it returns `False`.
+**Code Description**: The `validate_email` function is designed to check the validity of email addresses by matching them against a predefined regular expression pattern. The pattern requires the email to start with alphanumeric characters, optionally followed by a dot (`.`) or underscore (`_`), then the `@` symbol, and finally a domain name that includes at least one dot. The function uses the `re.match` method from the `re` module to perform this validation. If the email matches the pattern, the function returns `True`, indicating the email is valid. If the email does not match the pattern, the function returns `False`, indicating the email is invalid.
 
-**Note**: This function is useful for validating email addresses in applications where ensuring the correctness of email format is crucial, such as in user registration forms.
+**Note**: It's important to note that this validation method might not cover all valid email formats as defined by the RFC standards. It's a basic validation that checks for common patterns in email addresses.
 
 **Input Example**: 
 
 ```
-email = "example_user@example.com"
+validate_email("example@domain.com")
 ```
-This input example represents a string that contains an email address to be validated.
+This input example demonstrates how to use the `validate_email` function by passing a string representing an email address. The function will then validate this email address against the predefined pattern.
 
 **Output Example**: 
 
 ```
 True
 ```
-This output example indicates that the provided email address matches the regex pattern for valid email addresses and is therefore considered valid.
+This output example shows that the email address "example@domain.com" is considered valid according to the pattern used in the `validate_email` function, hence the function returns `True`.

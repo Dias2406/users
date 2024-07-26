@@ -10,7 +10,7 @@ The content of the file (source code) is as follows:
 `Put the file content here.`
 
 Explanation of code context:
-`Put the detailed description and analysis of the code context here.`
+`Put the description of the code context here.`
 
 Callee function information:
-`Put detailed description and analysis of callee function information here and explain its usage` (Ignore this section if there is no callee function.)
+`Put callee function information here.` (Ignore this section if there is no callee function.)
