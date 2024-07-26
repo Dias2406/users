@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple-users Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0px 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        h1,
+        h2 {
+            color: #4a90e2;
+        }
+
+        pre {
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', Courier;
+            color: crimson;
+            background-color: #f1f1f1;
+            padding: 2px 3px;
+            font-size: 105%;
+        }
+
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 300px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            box-sizing: border-box;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease;
+            z-index: 1001;
+        }
+
+        #sidebar-toggle {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            z-index: 1002;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        @media (min-width: 768px) {
+            #sidebar {
+                left: 0;
+            }
+
+            .container {
+                margin-left: 270px;
+            }
+
+            #sidebar-toggle {
+                display: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .container {
+                margin-left: 0;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                margin-top: 10px;
+            }
+        }
+
+        .floating-buttons {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .floating-button {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .floating-button:hover {
+            background-color: #3a7bc8;
+        }
+
+        @media (max-width: 767px) {
+            .floating-buttons {
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .floating-button {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+
+        .file-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            display: none;
+            min-width: 80vw;
+        }
+
+        .file-card.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        .file-card summary {
+            padding: 15px;
+            /* Adjusted for buttons */
+            background-color: #4a90e2;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        .file-card summary button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin-left: 5px;
+            border-radius: 6px;
+        }
+
+        .file-card summary button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: background-color 0.25s ease;
+        }
+
+        .file-card .content {
+            padding: 4px 20px 8px 20px;
+            transition: height 0.3s ease;
+        }
+
+        .modern-toc {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .modern-toc ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        .modern-toc li {
+            margin: 8px 0;
+        }
+
+        .modern-toc a {
+            text-decoration: none;
+            color: #0066cc;
+            transition: color 0.3s ease;
+        }
+
+        .modern-toc a:hover {
+            color: #004080;
+            text-decoration: underline;
+        }
+
+        .modern-toc details {
+            margin-bottom: 10px;
+        }
+
+        .modern-toc summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #444;
+            transition: color 0.3s ease;
+        }
+
+        .modern-toc summary:hover {
+            color: #0066cc;
+        }
+
+        .modern-toc details>ul {
+            margin-top: 8px;
+            border-left: 1px solid #ddd;
+            padding-left: 10px;
+        }
+
+        .modern-toc details>ul>li {
+            position: relative;
+        }
+
+        .modern-toc details>ul>li::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: -10px;
+            width: 10px;
+            height: 1px;
+            background-color: #ddd;
+        }
+    </style>
+</head><body>
+    <button id="sidebar-toggle">☰</button>
+
+    <div id="sidebar">
+        <h2 style="padding-left: 10px;">Files</h2>
+        <hr>
+        <div class="modern-toc">
+            <ul>
+                <ul>
+<li><details><summary>📁 utils</summary>
+<ul>
+<li><a href="javascript:void(0);" onclick="showFile('utils-utils-py')">🐍 utils.py</a></li>
+</ul>
+</details></li>
+<li><a href="javascript:void(0);" onclick="showFile('data_processor-py')">🐍 data_processor.py</a></li>
+<li><a href="javascript:void(0);" onclick="showFile('main-py')">🐍 main.py</a></li>
+<li><a href="javascript:void(0);" onclick="showFile('user-py')">🐍 user.py</a></li>
+</ul>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 id="documentation">Documentation</h2>
+        <div class="file-card" id="file-data_processor-py">
+    <summary id=data_processor-py>
+        <span class="title">data_processor.py</span>
+        <span class="actions">
+            <button onclick="copyFileContents('file-data_processor-py')" title="Copy">&#x2398; Copy</button>
+            <button onclick="closeFileCard('file-data_processor-py')">&#10005;</button>
+        </span>
+    </summary>
+
+    <div class="content">
+        <h1>data_processor.py</h1>
+<h2>ClassDef DataProcessor</h2>
+<p>The function of the class is to provide methods for processing data and validating email addresses.</p>
+<p><strong>Attributes</strong>:</p>
+<p>This class does not have explicitly defined attributes.</p>
+<p><strong>Functions</strong>:</p>
+<ul>
+<li>
+<p><code>process_data(self, data)</code> -&gt; <code>List[str]</code></p>
+<ul>
+<li>Parameters:<ul>
+<li><code>data</code> (<code>List[str]</code>): A list of data items (strings).</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li><code>List[str]</code>: A new list with each item from the input list converted to uppercase.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>check_emails(self, emails)</code> -&gt; <code>List[bool]</code></p>
+<ul>
+<li>Parameters:<ul>
+<li><code>emails</code> (<code>List[str]</code>): A list of email addresses.</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li><code>List[bool]</code>: A list of boolean values indicating the validity of each email address.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Called_functions</strong>:</p>
+<ul>
+<li><code>validate_email(email: str) -&gt; bool</code>: Checks if the given email address matches the pattern of a valid email. Returns <code>True</code> if the email is valid, otherwise <code>False</code>.</li>
+</ul>
+<p><strong>Code Description</strong>: The <code>DataProcessor</code> class contains two methods: <code>process_data</code> for converting data items to uppercase, and <code>check_emails</code> for validating email addresses using the <code>validate_email</code> function from the <code>utils</code> module. The <code>validate_email</code> function uses a regular expression to determine the validity of an email address.</p>
+<p><strong>Note</strong>: The <code>check_emails</code> method relies on the <code>validate_email</code> function from the <code>utils</code> module. Ensure that the <code>utils</code> module is correctly imported and the <code>validate_email</code> function is available.</p>
+<p><strong>Input Example</strong>: </p>
+<pre><code>data = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
+emails = [&quot;user@example.com&quot;, &quot;invalid-email&quot;, &quot;anotheruser@example.org&quot;]
+
+processor = DataProcessor()
+print(processor.process_data(data))
+print(processor.check_emails(emails))
+</code></pre>
+<p><strong>Output Example</strong>:</p>
+<pre><code>['APPLE', 'BANANA', 'CHERRY']
+[True, False, True]
+</code></pre>
+<p>This example demonstrates how to use the <code>DataProcessor</code> class to convert a list of strings to uppercase and validate a list of email addresses. The output shows the results of both operations.</p>
+    </div>
+</div><div class="file-card" id="file-main-py">
+    <summary id=main-py>
+        <span class="title">main.py</span>
+        <span class="actions">
+            <button onclick="copyFileContents('file-main-py')" title="Copy">&#x2398; Copy</button>
+            <button onclick="closeFileCard('file-main-py')">&#10005;</button>
+        </span>
+    </summary>
+
+    <div class="content">
+        <h1>main.py</h1>
+<h2>FunctionDef main</h2>
+<p>The function demonstrates the instantiation of a <code>User</code> object and the processing of data through the <code>DataProcessor</code> class.</p>
+<p><strong>Code Description</strong>: This function acts as the script's entry point. Initially, it instantiates the <code>User</code> class with predefined name and email attributes, then outputs the user's information. Subsequently, it instantiates the <code>DataProcessor</code> class and applies it to a predefined list of data items. The processed data, which is the original data items transformed to uppercase, is outputted to the console. This function illustrates the fundamental application of the <code>User</code> and <code>DataProcessor</code> classes by incorporating them into a straightforward workflow.</p>
+<p><strong>Note</strong>: This script is designed to function as the primary program. It exemplifies the instantiation and utilization of the <code>User</code> and <code>DataProcessor</code> classes. It is crucial to ensure that the <code>user</code> and <code>data_processor</code> modules are properly imported and accessible within the same environment as this script.</p>
+<p><strong>Input Example</strong>: </p>
+<pre><code>No direct input is fed into the `main` function. It internally utilizes a list of strings: [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;].
+</code></pre>
+<p><strong>Output Example</strong>: </p>
+<pre><code>&lt;User object representation&gt;
+Processed Data: ['APPLE', 'BANANA', 'CHERRY']
+</code></pre>
+<p>The precise output is contingent on the implementation of the <code>__str__</code> or <code>__repr__</code> method within the <code>User</code> class. The processed data illustrates the conversion of the original list of strings to uppercase.</p>
+<h2>Note</h2>
+<p>This script serves as a basic demonstration and may require adaptation or enhancement based on specific needs. For example, the list of data items for processing could be altered, or additional features could be integrated into the <code>User</code> and <code>DataProcessor</code> classes to augment the script's functionality.</p>
+    </div>
+</div><div class="file-card" id="file-user-py">
+    <summary id=user-py>
+        <span class="title">user.py</span>
+        <span class="actions">
+            <button onclick="copyFileContents('file-user-py')" title="Copy">&#x2398; Copy</button>
+            <button onclick="closeFileCard('file-user-py')">&#10005;</button>
+        </span>
+    </summary>
+
+    <div class="content">
+        <h1>user.py</h1>
+<h2>ClassDef User</h2>
+<p>The function of the class is to represent a user with a unique ID, name, and email address.</p>
+<p><strong>Attributes</strong>:</p>
+<ul>
+<li><code>id</code> (<code>UUID</code>): A unique identifier for the user, generated using the uuid library.</li>
+<li><code>name</code> (<code>str</code>): The name of the user.</li>
+<li><code>email</code> (<code>str</code>): The email address of the user.</li>
+</ul>
+<p><strong>Functions</strong>:</p>
+<ul>
+<li>
+<p><code>__init__</code>(<code>name</code>: <code>str</code>, <code>email</code>: <code>str</code>)</p>
+<ul>
+<li>Parameters:<ul>
+<li><code>name</code> (<code>str</code>): The name of the user.</li>
+<li><code>email</code> (<code>str</code>): The email address of the user.</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>No explicit return value but initializes a User instance.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>__str__</code>() -&gt; <code>str</code></p>
+<ul>
+<li>Parameters:<ul>
+<li>None</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li><code>str</code>: A string representation of the User instance.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>update_email</code>(<code>new_email</code>: <code>str</code>)</p>
+<ul>
+<li>Parameters:<ul>
+<li><code>new_email</code> (<code>str</code>): The new email address for the user.</li>
+</ul>
+</li>
+<li>Returns:<ul>
+<li>No explicit return value but updates the user's email address.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Code Description</strong>: The <code>User</code> class in this file is designed to encapsulate the properties and behaviors associated with a user entity. It leverages the <code>uuid</code> library to ensure each user instance has a unique identifier. The class provides a method to update the user's email, demonstrating encapsulation and the ability to modify instance attributes safely.</p>
+<p><strong>Note</strong>: When using the <code>User</code> class, ensure that the <code>name</code> and <code>email</code> parameters provided during instantiation are of type <code>str</code>. The <code>uuid</code> library is used to generate a unique identifier for each user instance, which means each <code>User</code> object will have a distinct <code>id</code> attribute.</p>
+<p><strong>Input Example</strong>: </p>
+<pre><code>user1 = User(&quot;John Doe&quot;, &quot;john.doe@example.com&quot;)
+</code></pre>
+<p>This example demonstrates how to create a new <code>User</code> instance with a name and email address.</p>
+<p><strong>Output Example</strong>:</p>
+<pre><code>print(user1)
+</code></pre>
+<p>This will output something similar to:</p>
+<pre><code>User [ID: 123e4567-e89b-12d3-a456-426614174000, Name: John Doe, Email: john.doe@example.com]
+</code></pre>
+<p>This output example shows the string representation of a <code>User</code> instance, including its unique ID, name, and email address.</p>
+    </div>
+</div><div class="file-card" id="file-utils-utils-py">
+    <summary id=utils-utils-py>
+        <span class="title">utils/utils.py</span>
+        <span class="actions">
+            <button onclick="copyFileContents('file-utils-utils-py')" title="Copy">&#x2398; Copy</button>
+            <button onclick="closeFileCard('file-utils-utils-py')">&#10005;</button>
+        </span>
+    </summary>
+
+    <div class="content">
+        <h1>utils.py</h1>
+<h2>Function Definition: validate_email</h2>
+<p>This function is designed to validate email addresses by employing regular expressions to ensure they conform to a specific pattern.</p>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>email</code> (<code>str</code>): The email address that needs to be validated.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>bool</code>: Returns <code>True</code> if the email address matches the predefined pattern, indicating it is valid. Otherwise, it returns <code>False</code>.</li>
+</ul>
+<p><strong>Code Description</strong>: Leveraging the <code>re</code> module from Python's standard library, the function matches the input email address against a regular expression pattern. The pattern enforces the email to begin with alphanumeric characters, optionally followed by a period (.) or underscore (_), then more alphanumeric characters. This is followed by the '@' symbol, more alphanumeric characters, a period (.), and finally, additional alphanumeric characters. This pattern is designed to validate common email address formats.</p>
+<p><strong>Note</strong>: It's important to note that this function does not encompass all possible valid email formats as outlined by the RFC standards. It is intended for basic validation purposes and may not be suitable for all scenarios where comprehensive email validation is required.</p>
+<p><strong>Input Example</strong>: </p>
+<pre><code>validate_email(&quot;example@test.com&quot;)
+</code></pre>
+<p>In this example, the <code>validate_email</code> function is called with a string argument that represents an email address. The function evaluates whether this email address adheres to the specified pattern.</p>
+<p><strong>Output Example</strong>: </p>
+<pre><code>True
+</code></pre>
+<p>The output indicates that the email address "example@test.com" is deemed valid based on the pattern defined in the <code>validate_email</code> function, resulting in a return value of <code>True</code>.</p>
+    </div>
+</div>
+    </div>
+
+    <div class="floating-buttons">
+        <button id="scroll-to-top" class="floating-button">↑ Top</button>
+    </div>
+    <script>
+    // Hide all file-cards when the page loads
+    window.addEventListener('load', function () {
+        document.querySelectorAll('.file-card').forEach(card => {
+            card.style.display = 'none';
+        });
+        adjustSidebarWidth();
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            console.log('Link clicked:', this.getAttribute('href'));
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                console.log('Target found, scrolling');
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            } else {
+                console.log('Target not found');
+            }
+        });
+    });
+
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const container = document.querySelector('.container');
+
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
+
+    function checkWindowSize() {
+        if (window.innerWidth >= 768) {
+            sidebar.classList.add('active');
+            container.style.marginLeft = '270px';
+        } else {
+            sidebar.classList.remove('active');
+            container.style.marginLeft = '0';
+        }
+    }
+
+    window.addEventListener('resize', checkWindowSize);
+    checkWindowSize();
+
+    // Scroll to Top functionality
+    const scrollToTopButton = document.getElementById('scroll-to-top');
+    scrollToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Show/hide scroll to top button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 50) {
+            scrollToTopButton.style.display = 'block';
+        } else {
+            scrollToTopButton.style.display = 'none';
+        }
+    });
+
+    // Initially hide the scroll to top button
+    scrollToTopButton.style.display = 'none';
+
+    document.querySelectorAll('.copy-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent the details from toggling
+            const targetId = e.target.getAttribute('data-target');
+            const content = document.querySelector(`#${targetId} + .content`).innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+    });
+
+    function adjustSidebarWidth() {
+        const sidebar = document.querySelector('#sidebar');
+        const toc = document.querySelector('.modern-toc');
+
+        // Reset the width to auto to get the full content width
+        sidebar.style.width = 'auto';
+
+        // Get the full content width
+        const contentWidth = toc.scrollWidth;
+
+        // Set the width to the content width, with a minimum of 300px and a maximum of 40% of viewport width
+        const newWidth = Math.max(270, Math.min(contentWidth + 60, window.innerWidth * 0.4));
+        sidebar.style.width = newWidth + 'px';
+    }
+
+    document.querySelectorAll('.modern-toc details').forEach(detail => {
+        detail.addEventListener('toggle', adjustSidebarWidth);
+    });
+    window.addEventListener('resize', adjustSidebarWidth);
+
+    function showFile(fileId) {
+        // Hide all file-cards and remove active class
+        document.querySelectorAll('.file-card').forEach(card => {
+            card.style.display = 'none';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.classList.remove('active');
+        });
+
+        const selectedCard = document.getElementById('file-' + fileId);
+        if (selectedCard) {
+            selectedCard.style.display = 'block';
+            setTimeout(() => {
+                selectedCard.style.opacity = '1';
+                selectedCard.style.transform = 'translateY(0)';
+                selectedCard.classList.add('active'); // Add active class to start the opacity and transform transition
+            }, 10);
+        }
+    }
+
+    function closeFileCard(cardId) {
+        const card = document.getElementById(cardId);
+        console.log('Closing card:', card);
+        if (card) {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.display = 'none';
+                card.classList.remove('active');
+            }, 500);
+        }
+    }
+
+    function copyFileContents(cardId) {
+        const card = document.querySelector(`#${cardId}`);
+        const content = card.querySelector('.content').textContent;
+        const copyButton = card.querySelector('button[title="Copy"]');
+
+        navigator.clipboard.writeText(content).then(() => {
+            const originalText = copyButton.innerHTML;
+            copyButton.innerHTML = 'Saved to clipboard!';
+            copyButton.disabled = true;
+
+            setTimeout(() => {
+                copyButton.innerHTML = originalText;
+                copyButton.disabled = false;
+            }, 3000);
+
+            console.log('Content copied:', content);
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+            copyButton.innerHTML = 'Failed to copy';
+
+            setTimeout(() => {
+                copyButton.innerHTML = originalText;
+            }, 3000);
+        });
+    }
+</script>
+</body>
+
+</html>
