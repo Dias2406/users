@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   repo-copilot:
-    image: zenawang/repo-copilot:agents
+    image: dias2406/repo-copilot:doc_gen
     container_name: repo-copilot
     volumes:
       - .:/workspace
