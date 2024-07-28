@@ -295,7 +295,45 @@
     </summary>
 
     <div class="content">
-        <p>The documentation appears comprehensive and well-structured, accurately reflecting the functionalities and usage of the <code>DataProcessor</code> class and its methods. No improvements are needed.</p>
+        <h1>data_processor.py</h1>
+<p>from .utils import validate_email</p>
+<p>"""
+Contains the DataProcessor class which has methods for processing data and checking the validity of email addresses using the function from utils.py. </p>
+<p>The DataProcessor class offers:
+- A method to process data by converting each item in a given list to uppercase.
+- A method to check the validity of email addresses provided in a list.
+"""</p>
+<p>class DataProcessor:
+    def process_data(self, data):
+        """
+        Processes a list of data items by converting each item to uppercase.</p>
+<pre><code>    Parameters:
+    - data (list): A list of data items (strings).
+
+    Returns:
+    - list: A new list containing the uppercase versions of the items from the input list.
+    """
+    return [item.upper() for item in data]
+
+def check_emails(self, emails):
+    """
+    Checks a list of emails for validity using a specific pattern to match valid email addresses.
+
+    An email is considered valid if it matches the following criteria:
+    - Starts with one or more lowercase letters or digits.
+    - An optional dot (.) or underscore (_) can follow the initial characters.
+    - Must contain an '@' symbol followed by one or more word characters and a dot.
+    - Ends with one or more word characters.
+
+    Parameters:
+    - emails (list): A list of email addresses (strings) to be validated.
+
+    Returns:
+    - list: A list of boolean values where False represents a valid email address and
+      True represents an invalid email address, corresponding to each email in the input list.
+    """
+    return [validate_email(email) for email in emails]
+</code></pre>
     </div>
 </div><div class="file-card" id="file-main-py">
     <summary id=main-py>
@@ -309,9 +347,17 @@
     <div class="content">
         <h1>main.py</h1>
 <h2>Overview:</h2>
-<p>The <code>main.py</code> file serves as the entry point for a simple script designed to demonstrate the instantiation and utilization of classes from separate modules. It primarily involves creating an instance of a <code>User</code> class, displaying its information, and processing a list of data through the <code>DataProcessor</code> class. The script showcases basic object-oriented programming concepts in Python, including class instantiation, method invocation, and the use of the <code>if __name__ == "__main__":</code> idiom to execute code blocks conditionally.</p>
+<p>The <code>main.py</code> file serves as the entry point for a script that demonstrates the instantiation and utilization of classes from separate modules. In this updated version, the script extends its functionality to include enhanced email validation and the capability to process data through transformation. Specifically, it involves creating an instance of a <code>User</code> class, displaying its information, processing a list of data through the <code>DataProcessor</code> class, checking the validity of multiple emails, updating the user's email with an error check for correctness, and finally printing the processed data along with the result of the email check. This script showcases object-oriented programming concepts in Python, from class instantiation and method invocation to error handling, while also demonstrating the use of the <code>if __name__ == "__main__":</code> idiom for conditional code execution.</p>
 <h2>FunctionDef main</h2>
-<p>The <code>main</code> function acts as the central execution point of the script. It orchestrates the creation of a <code>User</code> object with predefined attributes, prints this object (implicitly invoking the <code>User</code> class's string representation method), processes a predefined list of strings through the <code>DataProcessor</code> class, and finally prints the processed data.</p>
+<p>The <code>main</code> function acts as the central execution point of the script. It performs several operations involving the <code>User</code> and <code>DataProcessor</code> classes:</p>
+<ol>
+<li>It creates a <code>User</code> object with predefined attributes, including a unique identifier.</li>
+<li>It prints this object, implicitly invoking the <code>User</code> class's string representation method.</li>
+<li>It processes a predefined list of strings through the <code>DataProcessor</code> class, transforming each string to uppercase.</li>
+<li>It checks the validity of an array of emails using a method from the <code>DataProcessor</code> class, returning a list indicating each email's validity.</li>
+<li>It attempts to update the user's email to an invalid email address, which is expected to raise a <code>ValueError</code> due to email validation failure.</li>
+<li>Finally, it prints the processed data list and the result of the email check.</li>
+</ol>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li>None</li>
@@ -322,20 +368,22 @@
 </ul>
 <h2>Called_functions:</h2>
 <ul>
-<li><strong>user::User.<strong>init</strong></strong>: Initializes a new <code>User</code> instance with a name and email. This is demonstrated when the <code>User</code> object is created with "John Doe" and "john.doe@example.com" as arguments.</li>
-<li><strong>data_processor::DataProcessor.process_data</strong>: Accepts a list of strings and returns a new list with each string modified, presumably to uppercase based on the context provided. This method is called with a list of fruit names and returns their uppercase versions.</li>
+<li><strong>user::User.<strong>init</strong></strong>: Initializes a new <code>User</code> instance with a name, email, and a unique identifier. This is demonstrated when the <code>User</code> object is created with "John Doe" and "john.doe@example.com" as arguments.</li>
+<li><strong>data_processor::DataProcessor.process_data</strong>: Accepts a list of strings and returns a new list with each string converted to uppercase. This method is called with a list of fruit names and showcases data transformation.</li>
+<li><strong>data_processor::DataProcessor.check_emails</strong>: Accepts a list of emails and evaluates the validity of each, returning a list of evaluation results. It is inferred that this method verifies each email based on a specified pattern, adjusting its functionality to handle multiple emails. This method is called to validate the user's email.</li>
+<li><strong>user::User.update_email</strong>: Attempts to update the user's email with a new value, including a validation check. If the email does not pass validation, a <code>ValueError</code> is raised, preventing the update and ensuring email correctness.</li>
 </ul>
-<p><strong>Note</strong>: The actual implementations of <code>User.__init__</code> and <code>DataProcessor.process_data</code> are not provided in the <code>main.py</code> file. Their behaviors are inferred based on the usage within <code>main.py</code> and the provided output example. It's important to review these methods in their respective modules for a complete understanding of their functionalities.</p>
+<p><strong>Note</strong>: The precise implementations of <code>User.__init__</code>, <code>DataProcessor.process_data</code>, <code>DataProcessor.check_emails</code>, and <code>User.update_email</code> are detailed in their respective modules. Their behaviors are based on the provided modifications, enriching the script's functionality with data transformation and robust email validation.</p>
 <h2>Examples:</h2>
 <p><strong>Input Examples</strong>: </p>
 <pre><code>None (The main function is executed directly without input parameters)
 </code></pre>
 <p><strong>Output Example</strong>:</p>
 <pre><code>User(name=John Doe, email=john.doe@example.com)
+Checked Email: [True/False] (Depending on the validity of the provided emails)
 Processed Data: ['APPLE', 'BANANA', 'CHERRY']
 </code></pre>
-<p>This output demonstrates the creation of a <code>User</code> object with specific attributes and the processing of a list of strings through the <code>DataProcessor</code> class. The exact output may vary based on the implementations of the <code>User</code> class's string representation method and the <code>DataProcessor.process_data</code> method.</p>
-<p><strong>Note</strong>: The provided code snippet and explanation assume certain behaviors for the <code>User</code> and <code>DataProcessor</code> classes based on their usage in <code>main.py</code>. For a comprehensive understanding, it's recommended to review the source code of these classes. Additionally, the script is a straightforward example of using classes and methods in Python, making it suitable for educational purposes or as a template for more complex applications.</p>
+<p>The output demonstrates the instantiation of a <code>User</code> object with specified attributes including a unique identifier, the transformation of a list of strings through the <code>DataProcessor</code> class to uppercase, the evaluation of email validity for an array of emails, and the handling of an attempt to update the user's email with an invalid value. The inclusion of email validation and error handling for incorrect email updates enhances the script's complexity and showcases the practical application of these concepts in a Python script.</p>
     </div>
 </div><div class="file-card" id="file-user-py">
     <summary id=user-py>
@@ -349,9 +397,9 @@ Processed Data: ['APPLE', 'BANANA', 'CHERRY']
     <div class="content">
         <h1>user.py</h1>
 <h2>Overview:</h2>
-<p>The <code>user.py</code> file defines a <code>User</code> class that represents a user with a unique ID, name, and email address. It utilizes the <code>uuid</code> library to generate a unique identifier for each user instance. The class provides functionalities to initialize a user, represent the user as a string, and update the user's email address. This file is essential for managing user information in applications that require unique identification and basic user data management.</p>
+<p>The <code>user.py</code> file defines a <code>User</code> class that represents a user with a unique ID, name, and email address. It utilizes the <code>uuid</code> library to generate a unique identifier for each user instance. With the introduction of email validation via the <code>validate_email</code> function from the <code>.utils</code> module, the class now provides enhanced functionalities to initialize a user, represent the user as a string, and securely update the user's email address after validation. This file is essential for managing user information in applications requiring unique identification and basic user data management with an additional layer of email validation for integrity.</p>
 <h2>ClassDef User</h2>
-<p>The <code>User</code> class encapsulates user-related data and operations. It is designed to represent a user with a unique identifier, a name, and an email address. The class uses the <code>uuid</code> library to ensure that each user instance has a unique ID. This class is fundamental for applications that need to manage user information securely and efficiently.</p>
+<p>The <code>User</code> class encapsulates user-related data and operations. It is designed to represent a user with a unique identifier, a name, and an email address. The class uses the <code>uuid</code> library to ensure that each user instance has a unique ID. Furthermore, email validation is performed upon updating the email address, leveraging the <code>validate_email</code> function from the <code>.utils</code> module. This class is fundamental for applications that need to manage user information securely and efficiently.</p>
 <p><strong>Attributes</strong>:</p>
 <ul>
 <li><code>id</code> (<code>UUID</code>): A unique identifier for the user, generated using <code>uuid.uuid4()</code>.</li>
@@ -372,13 +420,17 @@ Processed Data: ['APPLE', 'BANANA', 'CHERRY']
 <li><code>str</code>: A string representation of the <code>User</code> instance.</li>
 </ul>
 <h3>FunctionDef update_email</h3>
-<p>This method allows updating the email address of the <code>User</code> instance. It is useful for maintaining up-to-date user information.</p>
+<p>This method has been updated to include email validation before updating the email address of the <code>User</code> instance. It utilizes the <code>validate_email</code> function from the <code>.utils</code> module to ensure the new email address does not conform to the specified validation criteria before proceeding with the update. If the new email address is invalid, a <code>ValueError</code> is raised. This represents a change in the validation logic, as previously, validation passed if the condition was true, but now it only passes if the condition is false.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>new_email</code> (<code>str</code>): The new email address to be assigned to the user.</li>
 </ul>
+<p><strong>Raises</strong>:</p>
+<ul>
+<li><code>ValueError</code>: If the new email address fails validation checks.</li>
+</ul>
 <h2>Called_functions:</h2>
-<p>The <code>User</code> class does not explicitly call external functions beyond its methods and the <code>uuid.uuid4()</code> function from the <code>uuid</code> library for generating unique identifiers. The class is designed to be self-contained, focusing on managing user information.</p>
+<p>The <code>User</code> class explicitly calls the <code>validate_email</code> function from the <code>.utils</code> module, in addition to its methods and the <code>uuid.uuid4()</code> function from the <code>uuid</code> library for generating unique identifiers. The inclusion of explicit email validation through an external function expands the class's functionality, focusing on managing user information with an added layer of data integrity.</p>
 <h2>Examples:</h2>
 <h3><strong>init</strong></h3>
 <p><strong>Input Example</strong>: </p>
@@ -399,8 +451,9 @@ A <code>User</code> instance is created with a unique ID, name "John Doe", and e
 <pre><code>user.update_email(&quot;new.email@example.com&quot;)
 </code></pre>
 <p><strong>Output Example</strong>: 
-The <code>email</code> attribute of the <code>user</code> instance is updated to "new.email@example.com".</p>
-<p><strong>Note</strong>: The <code>User</code> class provides a straightforward way to manage user information with unique identifiers. It could be extended with additional functionalities, such as password management or role assignments, to enhance its utility in more complex applications.</p>
+- If <code>"new.email@example.com"</code> does not conform to validation checks (i.e., is considered invalid): The <code>email</code> attribute of the <code>user</code> instance is updated to "new.email@example.com".
+- If the email is considered valid according to the criteria, a <code>ValueError</code> is raised with the message "Invalid email address".</p>
+<p><strong>Note</strong>: The <code>User</code> class provides a straightforward approach to managing user information with unique identifiers and now includes secure email updates through a revised validation strategy. This could be extended with additional functionalities, such as password management or role assignments, to enhance its utility in more complex applications.</p>
     </div>
 </div><div class="file-card" id="file-utils-utils-py">
     <summary id=utils-utils-py>
@@ -414,18 +467,18 @@ The <code>email</code> attribute of the <code>user</code> instance is updated to
     <div class="content">
         <h1>utils.py</h1>
 <h2>Overview:</h2>
-<p>The <code>utils.py</code> file contains utility functions that are designed to perform specific tasks which can be reused across different parts of a project. In this case, the file includes a function <code>validate_email</code> that is used to validate email addresses using regular expressions. This function is crucial for ensuring that email addresses provided by users or collected from various sources meet a standard format before they are processed or stored. The use of regular expressions for validation allows for flexible yet precise matching of email patterns.</p>
+<p>The <code>utils.py</code> file contains utility functions that are designed to perform specific tasks which can be reused across different parts of a project. In this case, the file includes a function <code>validate_email</code> that is used to validate email addresses using regular expressions. This function is crucial for ensuring that email addresses provided by users or collected from various sources are thoroughly verified against a standard format before they are processed or stored. The use of regular expressions for validation allows for flexible yet precise matching of email patterns.</p>
 <h2>FunctionDef validate_email</h2>
-<p>The <code>validate_email</code> function is designed to validate email addresses based on a predefined pattern using regular expressions. It ensures that the input string conforms to a standard email format, which is essential for operations requiring a valid email address, such as sending notifications or verifying user accounts.</p>
+<p>The <code>validate_email</code> function is designed to validate email addresses based on a predefined pattern using regular expressions. Contrary to the traditional validation approach, this updated function determines that an input string does not conform to a standard email format, which is critical for operations where detecting invalid email addresses is required, such as filtering out invalid entries or handling user input errors.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>email</code> (<code>str</code>): The email address to be validated. It is expected to be a string that potentially represents an email address.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>bool</code>: Returns <code>True</code> if the email address matches the predefined pattern, indicating it is valid. Returns <code>False</code> otherwise.</li>
+<li><code>bool</code>: Returns <code>False</code> if the email address matches the predefined pattern, indicating it is considered invalid according to the updated validation logic. Returns <code>True</code> otherwise, signaling that the email does not match the pattern and thereby treating it as invalid in conventional terms but valid in the context of this updated function's logic.</li>
 </ul>
-<p><strong>Functionality</strong>: The function utilizes the <code>re.match</code> method from the <code>re</code> (regular expressions) module to compare the input email against a specific pattern. The pattern allows for email addresses that start with alphanumeric characters, optionally followed by a dot or underscore, then an <code>@</code> symbol, followed by more alphanumeric characters, a dot, and finally, alphanumeric characters to represent the domain.</p>
+<p><strong>Functionality</strong>: The function utilizes the <code>re.match</code> method from the <code>re</code> (regular expressions) module to compare the input email against a specific pattern. The pattern aims to identify email addresses that start with alphanumeric characters, optionally followed by a dot or underscore, then an <code>@</code> symbol, followed by more alphanumeric characters, a dot, and finally, alphanumeric characters to represent the domain. However, based on the updated logic, a match to this pattern will lead to the return of <code>False</code>, signifying the email is invalid.</p>
 <p><strong>Important Implementation Details</strong>: The regular expression pattern is defined as a raw string (<code>r'...'</code>) to simplify the syntax by avoiding the need for double backslashes as escape characters.</p>
 <h2>Examples:</h2>
 <p><strong>Input Examples</strong>: </p>
@@ -433,20 +486,20 @@ The <code>email</code> attribute of the <code>user</code> instance is updated to
 </code></pre>
 <p>This input is a string that represents a typical email address format, including the user name, the <code>@</code> symbol, and the domain part.</p>
 <p><strong>Output Example</strong>:</p>
-<pre><code>True
+<pre><code>False
 </code></pre>
-<p>The output is <code>True</code> because the input email address <code>"john.doe@example.com"</code> matches the pattern defined in the <code>validate_email</code> function, indicating it is a valid email address.</p>
+<p>The output is <code>False</code> because, according to the updated logic of the <code>validate_email</code> function, the input email address <code>"john.doe@example.com"</code> matches the pattern defined but is treated as invalid due to the inverted return values.</p>
 <p><strong>Input Examples</strong>: </p>
 <pre><code>&quot;invalid-email&quot;
 </code></pre>
 <p>This input is a string that does not conform to the standard email address format, lacking the <code>@</code> symbol and the domain part.</p>
 <p><strong>Output Example</strong>:</p>
-<pre><code>False
+<pre><code>True
 </code></pre>
-<p>The output is <code>False</code> because the input string <code>"invalid-email"</code> does not match the pattern of a valid email address, indicating it is invalid.</p>
+<p>The output is <code>True</code>, indicating that according to the updated validation logic, the input string <code>"invalid-email"</code> does not match the pattern of a traditionally valid email address, thus being recognized as invalid which translates to a valid outcome in the context of the new function's purpose.</p>
 <h2>Called_functions:</h2>
-<p>The <code>validate_email</code> function relies on the <code>re.match</code> method from the Python standard library's <code>re</code> module for regular expression matching. This method is used to compare the input email address against a predefined pattern to determine its validity. There are no external callee functions from this file (<code>utils/utils.py</code>) mentioned, making <code>validate_email</code> a self-contained function.</p>
-<p><strong>Note</strong>: The use of regular expressions for email validation is a common practice, but it's important to ensure that the pattern used is comprehensive enough to cover most valid email formats while excluding invalid ones. Adjustments to the pattern may be necessary based on specific requirements or updates to email address standards.</p>
+<p>The <code>validate_email</code> function relies on the <code>re.match</code> method from the Python standard library's <code>re</code> module for regular expression matching. This method is utilized to compare the input email address against the defined pattern to determine its validity based on the updated logic. There are no external callee functions from this file (<code>utils/utils.py</code>) mentioned, making <code>validate_email</code> a self-contained function.</p>
+<p><strong>Note</strong>: The decision to invert the traditional validation logic stems from a specialized requirement to flag traditionally valid email patterns as invalid. It underscores the versatility in utilizing regular expressions for customized validation purposes and reflects a strategic approach to specific operational needs or error handling mechanisms.</p>
     </div>
 </div>
     </div>
