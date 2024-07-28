@@ -1,0 +1,40 @@
+The content of the file (source code) is as follows:
+```python
+# user.py
+import uuid
+
+"""
+Contains the User class which uses the uuid library to generate unique user IDs.
+"""
+class User:
+    def __init__(self, name, email):
+        self.id = uuid.uuid4()
+        self.name = name
+        self.email = email
+    
+    def __str__(self):
+        return f"User [ID: {self.id}, Name: {self.name}, Email: {self.email}]"
+    
+    def update_email(self, new_email):
+        self.email = new_email
+```
+
+Explanation of Every Class and Function:
+- **Class User**: This class represents a user with a unique ID, name, and email address. It uses the `uuid` library to generate a unique identifier for each user instance.
+  - **__init__(self, name, email)**: The constructor method for the `User` class. It initializes a new `User` instance with a unique ID (using `uuid.uuid4()`), a name, and an email address.
+  - **__str__(self)**: This method returns a string representation of the `User` instance, including its ID, name, and email. It is automatically called by the `print()` function when a `User` instance is passed to it.
+  - **update_email(self, new_email)**: This method allows updating the email address of the `User` instance. It takes a new email address as input and assigns it to the `email` attribute of the instance.
+
+Input/Ouput Examples:
+- **__init__**:
+  - Input: `User("John Doe", "john.doe@example.com")`
+  - Output: A `User` instance with a unique ID, name "John Doe", and email "john.doe@example.com".
+- **__str__**:
+  - Input: `print(user)` (assuming `user` is an instance of `User`)
+  - Output: `"User [ID: <unique_id>, Name: John Doe, Email: john.doe@example.com]"` (The `<unique_id>` part will be a unique UUID value.)
+- **update_email**:
+  - Input: `user.update_email("new.email@example.com")`
+  - Output: The `email` attribute of the `user` instance is updated to "new.email@example.com".
+
+Called functions information:
+There are no external callee functions from this file (`user.py`) mentioned in the provided information. The `User` class is self-contained, with its functionality relying on the standard Python `uuid` library for generating unique identifiers and its own methods for managing user information.
