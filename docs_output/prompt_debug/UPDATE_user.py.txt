@@ -1,3 +1,71 @@
+
+
+The following functions:
+['utils::validate_email']
+
+In the file below:
+# user.py
+import uuid
+from .utils import validate_email
+
+"""
+Contains the User class which uses the uuid library to generate unique user IDs.
+"""
+class User:
+    def __init__(self, name, email):
+        self.id = uuid.uuid4()
+        self.name = name
+        self.email = email
+    
+    def __str__(self):
+        return f"User [ID: {self.id}, Name: {self.name}, Email: {self.email}]"
+    
+    def update_email(self, new_email):
+        if validate_email(new_email):
+            raise ValueError("Invalid email address")
+        self.email = new_email
+
+
+Have been updated. These changes influence the current file on the path: 
+/workspace/user.py
+
+Please make sure to update the following functions in the file accordingly.
+['user::User.update_email']
+File content:
+# user.py
+import uuid
+from .utils import validate_email
+
+"""
+Contains the User class which uses the uuid library to generate unique user IDs.
+"""
+class User:
+    def __init__(self, name, email):
+        self.id = uuid.uuid4()
+        self.name = name
+        self.email = email
+    
+    def __str__(self):
+        return f"User [ID: {self.id}, Name: {self.name}, Email: {self.email}]"
+    
+    def update_email(self, new_email):
+        if validate_email(new_email):
+            raise ValueError("Invalid email address")
+        self.email = new_email
+
+These are the content of the functions that have been updated as well as additional callee functions that are dependent on the updated functions:
+
+Function/Class utils::validate_email:
+
+
+def validate_email(email):
+    pattern = '^[a-z0-9]+[\\._]?[a-z0-9]+[@]\\w+[.]\\w+$'
+    if re.match(pattern, email):
+        return False
+    return True
+
+
+Old documentation:
 # user.py
 
 ## Overview:
@@ -54,7 +122,7 @@ Assume a User instance with ID `12345`, name "John Doe", and email "john.doe@exa
 
 ### `update_email(self, new_email)`
 
-Allows updating the email address of the User instance. This method includes an email validation check using the `validate_email` function from the `.utils` module. If the new email provided does not pass the validation (i.e., the `validate_email` function returns `True`), a `ValueError` is thrown with the message "Invalid email address". Only when the new email is deemed valid (i.e., the `validate_email` function returns `False`), the email address of the user is updated.
+Allows updating the email address of the User instance. This method now incorporates an email validation check. If the new email provided fails the validation, a `ValueError` is raised with the message "Invalid email address".
 
 **Parameters**:
 - `new_email`: A string representing the new email address to be assigned to the user.
@@ -63,19 +131,19 @@ Allows updating the email address of the User instance. This method includes an 
 - None.
 
 **Raises**:
-- `ValueError`: If the new email address fails the validation check, indicating that it is not in a valid format as defined by the validation pattern.
+- `ValueError`: If the new email address fails the validation check.
 
-**Note**: This method leverages the `validate_email(new_email)` function for validating the new email addresses against a specific pattern. It ensures that the `email` attribute of the User instance is updated only with valid email addresses.
+**Note**: This method now utilizes the `validate_email(new_email)` function to check the validity of the new email address before updating. The `email` attribute of the User instance is updated only if the new email passes the validation.
 
 #### Examples:
 **Input Example**: 
 ```
 Before: User instance with email "john.doe@example.com".
-Input: new_email parameter with value "invalid#email.com"
+Input: new_email parameter with value "invalidemail"
 ```
 **Output Example**:
 ```
-Raises ValueError with message "Invalid email address" due to the failure of email validation.
+Raises ValueError with message "Invalid email address".
 ```
 
 ## Called_functions:
@@ -92,3 +160,7 @@ No new future enhancements or limitations discussions were prompted by the recen
 
 ## Conclusion:
 This documentation has been updated to reflect the incorporation of email validation in the `User` class, specifically within the `update_email` method. Through these updates, the class now includes improved data integrity measures by validating email addresses before assignment, ensuring the utility and reliability of the User class in managing user information.
+(Note:
+1. DO NOT CHANGE ANYTHING IN THE OLD DOCUMENTATION THAT HAS NOT BEEN AFFECTED BY THE CODE CHANGES.
+2. FOLLOW THE FORMAT OF THE OLD DOCUMENTATION FOR CONSISTENCY.)
+3. DO NOT CHANGE THE FORMAT OF THE DOCUMENTATION.)
