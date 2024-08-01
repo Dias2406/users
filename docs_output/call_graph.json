@@ -40,7 +40,7 @@
         "file_name": "EXTERNAL"
     },
     "data_processor::DataProcessor.check_emails": {
-        "uid": "node_c2da332c",
+        "uid": "node_b1c20a60",
         "name": "data_processor::DataProcessor.check_emails",
         "content": "\n\ndef check_emails(self, emails):\n    return [validate_email(email) for email in emails]\n",
         "callers": [
@@ -52,7 +52,7 @@
         "file_name": "/workspace/data_processor.py"
     },
     "data_processor::DataProcessor.process_data": {
-        "uid": "node_19b21d31",
+        "uid": "node_95e3ee05",
         "name": "data_processor::DataProcessor.process_data",
         "content": "\n\ndef process_data(self, data):\n    return [item.upper() for item in data]\n",
         "callers": [
@@ -62,7 +62,7 @@
         "file_name": "/workspace/data_processor.py"
     },
     "main::(global)": {
-        "uid": "node_48a9e684",
+        "uid": "node_0012d7d2",
         "name": "main::(global)",
         "content": "",
         "callers": [],
@@ -72,7 +72,7 @@
         "file_name": "/workspace/main.py"
     },
     "main::main": {
-        "uid": "node_66075c72",
+        "uid": "node_7b64b3a8",
         "name": "main::main",
         "content": "\n\ndef main():\n    user = User('John Doe', 'john.doe@example.com')\n    print(user)\n    processor = DataProcessor()\n    data = ['apple', 'banana', 'cherry']\n    processed_data = processor.process_data(data)\n    check_emails = processor.check_emails(['dias@gmail.com', 'diasgmail.com'])\n    user.update_email('invalid_email')\n    print(user)\n    print(f'Check Email: {check_emails}')\n    print(f'Processed Data: {processed_data}')\n",
         "callers": [
@@ -91,7 +91,7 @@
         "file_name": "/workspace/main.py"
     },
     "user::User.__init__": {
-        "uid": "node_8b3bfc6f",
+        "uid": "node_266d1776",
         "name": "user::User.__init__",
         "content": "\n\ndef __init__(self, name, email):\n    self.id = uuid.uuid4()\n    self.name = name\n    self.email = email\n",
         "callers": [
@@ -103,7 +103,7 @@
         "file_name": "/workspace/user.py"
     },
     "user::User.update_email": {
-        "uid": "node_9fa6377e",
+        "uid": "node_b2f6fad1",
         "name": "user::User.update_email",
         "content": "\n\ndef update_email(self, new_email):\n    if validate_email(new_email):\n        raise ValueError('Invalid email address')\n    self.email = new_email\n",
         "callers": [
@@ -116,7 +116,7 @@
         "file_name": "/workspace/user.py"
     },
     "utils::validate_email": {
-        "uid": "node_1b99c03d",
+        "uid": "node_a12d8776",
         "name": "utils::validate_email",
         "content": "\n\ndef validate_email(email):\n    pattern = '^[a-z0-9]+[\\\\._]?[a-z0-9]+[@]\\\\w+[.]\\\\w+$'\n    if re.match(pattern, email):\n        return False\n    return True\n",
         "callers": [

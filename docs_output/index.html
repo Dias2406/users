@@ -344,6 +344,11 @@
 - <strong>Input</strong>: <code>['name.surname@example.com', 'name+tag@example.co.uk', 'invalid@ email.com', 'justastring']</code>
 - <strong>Output</strong>: <code>[False, False, True, True]</code>
 This set of examples includes email addresses with unusual but valid formats (according to traditional expectations), and common invalid formats, showcasing the method's ability to discern valid from invalid email addresses based on the updated criteria.</p>
+<ul>
+<li><strong>Input</strong>: <code>['example@domain.com', '', 'test@.com', 'user@company.com']</code></li>
+<li><strong>Output</strong>: <code>[False, True, True, False]</code>
+This example further illustrates the validation capabilities, handling cases of an empty string, an email with a missing domain name, and valid emails, accurately reflecting the method's efficiency in different scenarios.</li>
+</ul>
 <h2>Called_functions:</h2>
 <ul>
 <li><strong>utils::validate_email(email)</strong>: This function is defined in <code>utils.py</code> and is responsible for validating email addresses. It uses a regular expression pattern to match email addresses and returns <code>False</code> if the email matches the pattern (indicating a valid format), otherwise <code>True</code> for invalid formats. The <code>check_emails</code> method in the <code>DataProcessor</code> class calls this function for each email in the input list to determine its validity, according to the updated logic. This function is crucial for maintaining data integrity and preventing invalid data entry.</li>

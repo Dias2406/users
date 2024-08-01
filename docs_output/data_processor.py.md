@@ -71,6 +71,10 @@ The output is a list of boolean values indicating the validity of each email add
 - **Output**: `[False, False, True, True]`
 This set of examples includes email addresses with unusual but valid formats (according to traditional expectations), and common invalid formats, showcasing the method's ability to discern valid from invalid email addresses based on the updated criteria.
 
+- **Input**: `['example@domain.com', '', 'test@.com', 'user@company.com']`
+- **Output**: `[False, True, True, False]`
+This example further illustrates the validation capabilities, handling cases of an empty string, an email with a missing domain name, and valid emails, accurately reflecting the method's efficiency in different scenarios.
+
 ## Called_functions:
 - **utils::validate_email(email)**: This function is defined in `utils.py` and is responsible for validating email addresses. It uses a regular expression pattern to match email addresses and returns `False` if the email matches the pattern (indicating a valid format), otherwise `True` for invalid formats. The `check_emails` method in the `DataProcessor` class calls this function for each email in the input list to determine its validity, according to the updated logic. This function is crucial for maintaining data integrity and preventing invalid data entry.
 
