@@ -1,3 +1,20 @@
+The user has requested an update for the documentation in the file /workspace/data_processor.py with the following comment:
+Add more Input/Output examples for check_emails method
+Please update the documentation accordingly. The current content of the file is as follows:
+# data_processor.py
+from .utils import validate_email
+
+"""
+Contains the DataProcessor class which has methods for processing data and checking the validity of email addresses using the function from utils.py.
+"""
+class DataProcessor:
+    def process_data(self, data):
+        return [item.upper() for item in data]
+    
+    def check_emails(self, emails):
+        return [validate_email(email) for email in emails]
+
+The old documentation is as follows:
 # data_processor.py
 
 ## Overview:
@@ -71,10 +88,6 @@ The output is a list of boolean values indicating the validity of each email add
 - **Output**: `[False, False, True, True]`
 This set of examples includes email addresses with unusual but valid formats (according to traditional expectations), and common invalid formats, showcasing the method's ability to discern valid from invalid email addresses based on the updated criteria.
 
-- **Input**: `['example@domain.com', '', 'test@.com', 'user@company.com']`
-- **Output**: `[False, True, True, False]`
-This example further illustrates the validation capabilities, handling cases of an empty string, an email with a missing domain name, and valid emails, accurately reflecting the method's efficiency in different scenarios.
-
 ## Called_functions:
 - **utils::validate_email(email)**: This function is defined in `utils.py` and is responsible for validating email addresses. It uses a regular expression pattern to match email addresses and returns `False` if the email matches the pattern (indicating a valid format), otherwise `True` for invalid formats. The `check_emails` method in the `DataProcessor` class calls this function for each email in the input list to determine its validity, according to the updated logic. This function is crucial for maintaining data integrity and preventing invalid data entry.
 
@@ -88,3 +101,8 @@ When using these methods with very large datasets, users should be aware of pote
 
 ## Customization and Extension
 Users can extend or customize the `DataProcessor` class for their specific needs. For instance, modifying the `process_data` method to handle different text transformations or extending the `check_emails` method to use different validation criteria can tailor the class more closely to application requirements. This flexibility encourages users to adapt the class to fit their unique data processing and validation scenarios.
+
+Please provide the updated documentation content. (Note:
+1. DO NOT CHANGE ANYTHING IN THE OLD DOCUMENTATION THAT HAS NOT BEEN MENTIONED IN THE COMMENT.
+2. FOLLOW THE FORMAT OF THE OLD DOCUMENTATION FOR CONSISTENCY.)
+3. DO NOT CHANGE THE FORMAT OF THE DOCUMENTATION.)
