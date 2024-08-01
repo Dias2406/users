@@ -13,6 +13,8 @@ def main():
     data = ["apple", "banana", "cherry"]
     processed_data = processor.process_data(data)
     check_emails = processor.check_emails(["dias@gmail.com", "diasgmail.com"])
+    user.update_email("invalid_email")
+    print(user)
     print(f"Check Email: {check_emails}")
     print(f"Processed Data: {processed_data}")
 
